@@ -1,0 +1,13 @@
+#!/bin/bash
+
+SRC_DIR="ui"
+DST_DIR="py_ui"
+
+for fpath in ${SRC_DIR}/*
+do
+    fullname=$(basename "$fpath")
+    fname="${fullname%.*}"
+    new_fname="${fname}_ui.py"
+    new_fpath="${DST_DIR}/${new_fname}"
+    pyuic4 ${fpath} > ${new_fpath}
+done
