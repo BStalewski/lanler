@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/new_user.ui'
 #
-# Created: Sat Jun 29 02:10:23 2013
+# Created: Sat Jun 29 13:32:46 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -23,46 +23,45 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(276, 333)
-        self.gridLayout = QtGui.QGridLayout(Dialog)
+class Ui_NewUserDialog(object):
+    def setupUi(self, NewUserDialog):
+        NewUserDialog.setObjectName(_fromUtf8("NewUserDialog"))
+        NewUserDialog.resize(274, 146)
+        self.gridLayout = QtGui.QGridLayout(NewUserDialog)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.verticalLayout = QtGui.QVBoxLayout()
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.label = QtGui.QLabel(Dialog)
-        self.label.setObjectName(_fromUtf8("label"))
-        self.verticalLayout.addWidget(self.label)
-        self.lineEdit = QtGui.QLineEdit(Dialog)
-        self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
-        self.verticalLayout.addWidget(self.lineEdit)
-        self.line = QtGui.QFrame(Dialog)
+        self.userNameLabel = QtGui.QLabel(NewUserDialog)
+        self.userNameLabel.setObjectName(_fromUtf8("userNameLabel"))
+        self.verticalLayout.addWidget(self.userNameLabel)
+        self.userNameLineEdit = QtGui.QLineEdit(NewUserDialog)
+        self.userNameLineEdit.setObjectName(_fromUtf8("userNameLineEdit"))
+        self.verticalLayout.addWidget(self.userNameLineEdit)
+        self.line = QtGui.QFrame(NewUserDialog)
         self.line.setFrameShape(QtGui.QFrame.HLine)
         self.line.setFrameShadow(QtGui.QFrame.Sunken)
         self.line.setObjectName(_fromUtf8("line"))
         self.verticalLayout.addWidget(self.line)
-        self.label_2 = QtGui.QLabel(Dialog)
-        self.label_2.setObjectName(_fromUtf8("label_2"))
-        self.verticalLayout.addWidget(self.label_2)
-        self.listWidget = QtGui.QListWidget(Dialog)
-        self.listWidget.setObjectName(_fromUtf8("listWidget"))
-        self.verticalLayout.addWidget(self.listWidget)
+        self.importGroupBox = QtGui.QGroupBox(NewUserDialog)
+        self.importGroupBox.setObjectName(_fromUtf8("importGroupBox"))
+        self.importGroupBoxLayout = QtGui.QVBoxLayout(self.importGroupBox)
+        self.importGroupBoxLayout.setObjectName(_fromUtf8("importGroupBoxLayout"))
+        self.verticalLayout.addWidget(self.importGroupBox)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
-        self.buttonBox = QtGui.QDialogButtonBox(Dialog)
+        self.buttonBox = QtGui.QDialogButtonBox(NewUserDialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setCenterButtons(False)
         self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
         self.gridLayout.addWidget(self.buttonBox, 1, 0, 1, 1)
 
-        self.retranslateUi(Dialog)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Dialog.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), Dialog.reject)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(NewUserDialog)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), NewUserDialog.accept)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), NewUserDialog.reject)
+        QtCore.QMetaObject.connectSlotsByName(NewUserDialog)
 
-    def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(_translate("Dialog", "New user", None))
-        self.label.setText(_translate("Dialog", "Nazwa użytkownika:", None))
-        self.label_2.setText(_translate("Dialog", "Importuj słownictwo z innych kont:", None))
+    def retranslateUi(self, NewUserDialog):
+        NewUserDialog.setWindowTitle(_translate("NewUserDialog", "New user", None))
+        self.userNameLabel.setText(_translate("NewUserDialog", "Nazwa użytkownika:", None))
+        self.importGroupBox.setTitle(_translate("NewUserDialog", "Importuj słownictwo z innych kont:", None))
 

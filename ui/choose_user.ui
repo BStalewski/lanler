@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>ChooseUserDialog</class>
+ <widget class="QDialog" name="ChooseUserDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>240</width>
-    <height>320</height>
+    <width>194</width>
+    <height>137</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,19 +17,17 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Choose user:</string>
+      <widget class="QGroupBox" name="chooseUserGroupBox">
+       <property name="title">
+        <string>Wybierz użytkownika:</string>
        </property>
+       <layout class="QVBoxLayout" name="groupBoxLayout"/>
       </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="listWidget"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="newUserButton">
        <property name="text">
-        <string>Create new user</string>
+        <string>Nowy użytkownik</string>
        </property>
       </widget>
      </item>
@@ -52,7 +50,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>ChooseUserDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -68,7 +66,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>ChooseUserDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>NewUserDialog</class>
+ <widget class="QDialog" name="NewUserDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>276</width>
-    <height>333</height>
+    <width>274</width>
+    <height>146</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,14 +17,14 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="userNameLabel">
        <property name="text">
         <string>Nazwa użytkownika:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="userNameLineEdit"/>
      </item>
      <item>
       <widget class="Line" name="line">
@@ -34,14 +34,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
+      <widget class="QGroupBox" name="importGroupBox">
+       <property name="title">
         <string>Importuj słownictwo z innych kont:</string>
        </property>
+       <layout class="QVBoxLayout" name="importGroupBoxLayout"/>
       </widget>
-     </item>
-     <item>
-      <widget class="QListWidget" name="listWidget"/>
      </item>
     </layout>
    </item>
@@ -65,7 +63,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>NewUserDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -81,7 +79,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>NewUserDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

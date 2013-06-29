@@ -117,7 +117,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="userName"/>
  </widget>
  <resources/>
  <connections/>

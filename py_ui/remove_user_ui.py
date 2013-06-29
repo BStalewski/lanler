@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/remove_user.ui'
 #
-# Created: Sat Jun 29 02:10:23 2013
+# Created: Sat Jun 29 13:32:46 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!

@@ -3,18 +3,25 @@
 
 import sys
 
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
+from PyQt4.QtGui import (QMainWindow, QAction, QDialog, QApplication,
+QRadioButton, QCheckBox)
+
+from model import Model
 
 from py_ui.main_ui import Ui_MainWindow
+from py_ui.choose_user_ui import Ui_ChooseUserDialog
+from py_ui.new_user_ui import Ui_NewUserDialog
 
-class Gui(QtGui.QMainWindow, Ui_MainWindow):
 
-    def __init__(self):
-        QtGui.QMainWindow.__init__(self, None)
+class Gui(QMainWindow, Ui_MainWindow):
+
+    def __init__(self, model):
+        QMainWindow.__init__(self, None)
+        self.model = model
+
         self.setupUi(self)
-
         self.init_menu_bar()
-
         self.statusBar()
 
         self.show()
@@ -49,7 +56,7 @@ class Gui(QtGui.QMainWindow, Ui_MainWindow):
         '''
 
     def create_action(self, name, shortcut, status_tip, callback, enabled=True):
-        action = QtGui.QAction(name, self)
+        action = QAction(name, self)
         action.setShortcut(shortcut)
         action.setStatusTip(status_tip)
         action.triggered.connect(callback)
@@ -57,17 +64,82 @@ class Gui(QtGui.QMainWindow, Ui_MainWindow):
         return action
 
     def choose_user(self):
-        print 'cu'
-        pass
+        names = self.model.get_users_names()
+        dialog = ChooseUserDialog(names, self)
+
+        if dialog.exec_():
+            user_name = dialog.get_chosen_user().__str__()
+            self.show_logged_user(user_name)
+            return True
+
+        return False
+
+    def show_logged_user(self, user_name):
+        msg = u'Użytkownik: ' + user_name
+        self.userName.showMessage(msg)
 
 
-class ChooseUserDialog(QtGui.QMainWindow, Ui_):
+class ChooseUserDialog(QDialog, Ui_ChooseUserDialog):
+    def __init__(self, names, parent=None):
+        QDialog.__init__(self, parent)
+        self.setupUi(self)
+        self.radio_buttons = []
+        self.connect(self.newUserButton, QtCore.SIGNAL('clicked()'), self.create_new_user)
+        self.user_names = names
+
+        for name in names:
+            self.add_user(name)
+
+    def add_user(self, name):
+        radio_button = QRadioButton(name, self)
+        if not len(self.radio_buttons):
+            radio_button.setChecked(True)
+
+        self.groupBoxLayout.addWidget(radio_button)
+        self.radio_buttons.append(radio_button)
+
+    def get_chosen_user(self):
+        for radio_button in self.radio_buttons:
+            if radio_button.isChecked():
+                return radio_button.text()
+
+    def create_new_user(self):
+        new_user_dialog = NewUserDialog(self.user_names, self)
+
+        if new_user_dialog.exec_():
+            print 'import from: '
+            print new_user_dialog.get_import_users()
+
+        else:
+            print 'no_add_new_user'
+
+
+class NewUserDialog(QDialog, Ui_NewUserDialog):
+    def __init__(self, current_users_names, parent=None):
+        QDialog.__init__(self, parent)
+        self.setupUi(self)
+
+        self.check_boxes = []
+        for name in current_users_names:
+            check_box = QCheckBox(name, self)
+            self.importGroupBoxLayout.addWidget(check_box)
+            self.check_boxes.append(check_box)
+
+    def get_user_name(self):
+        return self.userNameLineEdit.text()
+
+    def get_import_users(self):
+        return [checkbox.text().__str__() for checkbox in self.check_boxes if checkbox.isChecked()]
+
 
 def main():
-    app = QtGui.QApplication(sys.argv)
-    gui = Gui()
-    gui.choose_user()
-    sys.exit(app.exec_())
+    app = QApplication(sys.argv)
+    model = Model()
+    gui = Gui(model)
+    if not gui.choose_user():
+        gui.close()
+    else:
+        sys.exit(app.exec_())
 
 
 if __name__ == '__main__':
