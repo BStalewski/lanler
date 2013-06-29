@@ -11,6 +11,6 @@ class Model:
     def get_users_names(self):
         return self.db.get_users_names()
 
-    def create_user(self, qname):
+    def create_user(self, qname, import_user_names):
         name = qname.__str__()
-        self.db.create_user(name)
+        self.db.create_user(name, import_user_names)

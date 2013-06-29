@@ -64,8 +64,7 @@ class Gui(QMainWindow, Ui_MainWindow):
         return action
 
     def choose_user(self):
-        names = self.model.get_users_names()
-        dialog = ChooseUserDialog(names, self)
+        dialog = ChooseUserDialog(self.model, self)
 
         if dialog.exec_():
             user_name = dialog.get_chosen_user().__str__()
@@ -80,11 +79,13 @@ class Gui(QMainWindow, Ui_MainWindow):
 
 
 class ChooseUserDialog(QDialog, Ui_ChooseUserDialog):
-    def __init__(self, names, parent=None):
+    def __init__(self, model, parent=None):
         QDialog.__init__(self, parent)
         self.setupUi(self)
         self.radio_buttons = []
         self.connect(self.newUserButton, QtCore.SIGNAL('clicked()'), self.create_new_user)
+        self.model = model
+        names = self.model.get_users_names()
         self.user_names = names
 
         for name in names:
@@ -104,23 +105,27 @@ class ChooseUserDialog(QDialog, Ui_ChooseUserDialog):
                 return radio_button.text()
 
     def create_new_user(self):
-        new_user_dialog = NewUserDialog(self.user_names, self)
+        new_user_dialog = NewUserDialog(model, self)
 
         if new_user_dialog.exec_():
             print 'import from: '
             print new_user_dialog.get_import_users()
-
+            new_user_name = new_user_dialog.get_user_name()
+            import_users = new_user_dialog.get_import_users()
+            self.model.create_user(new_user_name, import_users)
+            self.add_user(new_user_name)
+            self.radio_buttons[-1].setChecked(True)
         else:
             print 'no_add_new_user'
 
 
 class NewUserDialog(QDialog, Ui_NewUserDialog):
-    def __init__(self, current_users_names, parent=None):
+    def __init__(self, model, current_users_names, parent=None):
         QDialog.__init__(self, parent)
         self.setupUi(self)
 
         self.check_boxes = []
-        for name in current_users_names:
+        for name in self.model.get_users_names():
             check_box = QCheckBox(name, self)
             self.importGroupBoxLayout.addWidget(check_box)
             self.check_boxes.append(check_box)
