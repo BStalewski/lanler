@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/remove_user.ui'
 #
-# Created: Sat Jun 29 13:32:46 2013
+# Created: Sat Jun 29 23:25:48 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,17 +26,14 @@ except AttributeError:
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(240, 320)
+        Dialog.resize(194, 81)
         self.gridLayout = QtGui.QGridLayout(Dialog)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.verticalLayout = QtGui.QVBoxLayout()
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.label = QtGui.QLabel(Dialog)
-        self.label.setObjectName(_fromUtf8("label"))
-        self.verticalLayout.addWidget(self.label)
-        self.listWidget = QtGui.QListWidget(Dialog)
-        self.listWidget.setObjectName(_fromUtf8("listWidget"))
-        self.verticalLayout.addWidget(self.listWidget)
+        self.groupBox = QtGui.QGroupBox(Dialog)
+        self.groupBox.setObjectName(_fromUtf8("groupBox"))
+        self.verticalLayout.addWidget(self.groupBox)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
         self.buttonBox = QtGui.QDialogButtonBox(Dialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
@@ -51,5 +48,5 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(_translate("Dialog", "Remove user", None))
-        self.label.setText(_translate("Dialog", "Remove chosen user:", None))
+        self.groupBox.setTitle(_translate("Dialog", "Usuń użytkownika:", None))
 

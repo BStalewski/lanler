@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>240</width>
-    <height>320</height>
+    <width>194</width>
+    <height>81</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,14 +17,11 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Remove chosen user:</string>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Usuń użytkownika:</string>
        </property>
       </widget>
-     </item>
-     <item>
-      <widget class="QListWidget" name="listWidget"/>
      </item>
     </layout>
    </item>

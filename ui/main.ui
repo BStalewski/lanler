@@ -55,21 +55,21 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="addPoSButton">
           <property name="text">
            <string>Dodaj ...</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="testButton">
           <property name="text">
            <string>Test</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="optionsButton">
           <property name="text">
            <string>Opcje</string>
           </property>

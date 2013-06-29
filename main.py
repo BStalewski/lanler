@@ -5,22 +5,31 @@ import sys
 
 from PyQt4 import QtGui, QtCore
 from PyQt4.QtGui import (QAction, QApplication, QCheckBox, QDialog,
-QMainWindow, QMessageBox, QRadioButton,)
+QFrame, QMainWindow, QMessageBox, QRadioButton,)
 
 from model import Model
 
 from py_ui.main_ui import Ui_MainWindow
 from py_ui.choose_user_ui import Ui_ChooseUserDialog
 from py_ui.new_user_ui import Ui_NewUserDialog
+from py_ui.choose_add_pos_ui import Ui_AddPoSFrame
+from py_ui.options_ui import Ui_OptionsFrame
+from py_ui.add_noun_ui import Ui_AddNounFrame
 
 
 class Gui(QMainWindow, Ui_MainWindow):
 
     def __init__(self, model):
         QMainWindow.__init__(self, None)
+        self.setupUi(self)
+
+        self.connect(self.addPoSButton, QtCore.SIGNAL('clicked()'), self.add_pos)
+        self.connect(self.testButton, QtCore.SIGNAL('clicked()'), self.test)
+        self.connect(self.optionsButton, QtCore.SIGNAL('clicked()'), self.options)
+
         self.model = model
 
-        self.setupUi(self)
+        self.right_frame = None
         self.init_menu_bar()
         self.statusBar()
 
@@ -72,6 +81,28 @@ class Gui(QMainWindow, Ui_MainWindow):
             return True
 
         return False
+
+    def change_right_frame(fun):
+        def wrapper(self, *args, **kwargs):
+            if self.right_frame:
+                self.right_frame.close()
+            self.right_frame = fun(self, *args, **kwargs)
+            self.horizontalLayout.addWidget(self.right_frame)
+
+        return wrapper
+
+    @change_right_frame
+    def add_pos(self):
+        return AddPoSFrame(self)
+
+    @change_right_frame
+    def test(self):
+        print 'TEST'
+        raise NotImplementedException('test')
+
+    @change_right_frame
+    def options(self):
+        return OptionsFrame(self)
 
     def show_logged_user(self, user_name):
         msg = u'Użytkownik: ' + user_name
@@ -142,6 +173,60 @@ class NewUserDialog(QDialog, Ui_NewUserDialog):
             QDialog.accept(self)
         else:
             QMessageBox.warning(self, u'Błąd', u'Błąd: nazwa użytkownika musi być unikalna')
+
+
+class AddPoSFrame(QFrame, Ui_AddPoSFrame):
+    def __init__(self, parent=None):
+        QFrame.__init__(self, parent)
+        self.setupUi(self)
+        self.connect(self.addNounButton, QtCore.SIGNAL('clicked()'), self.add_noun)
+        self.connect(self.addVerbButton, QtCore.SIGNAL('clicked()'), self.add_verb)
+        self.connect(self.addAdjectiveButton, QtCore.SIGNAL('clicked()'), self.add_adjective)
+        self.connect(self.addPronounButton, QtCore.SIGNAL('clicked()'), self.add_pronoun)
+
+    def add_noun(self):
+        print 'add_noun'
+        raise NotImplementedException('add noun')
+
+    def add_verb(self):
+        print 'add_verb'
+        raise NotImplementedException('add verb')
+
+    def add_adjective(self):
+        print 'add adjective'
+        raise NotImplementedException('add adjective')
+
+    def add_pronoun(self):
+        print 'add pronoun'
+        raise NotImplementedException('add pronoun')
+
+
+class OptionsFrame(QFrame, Ui_OptionsFrame):
+    def __init__(self, parent=None):
+        QFrame.__init__(self, parent)
+        self.setupUi(self)
+        self.connect(self.changeUserButton, QtCore.SIGNAL('clicked()'), self.change_user)
+        self.connect(self.removeUserButton, QtCore.SIGNAL('clicked()'), self.remove_user)
+
+    def change_user(self):
+        print 'change user'
+        raise NotImplementedException('change user')
+
+    def remove_user(self):
+        print 'remove user'
+        raise NotImplementedException('remove user')
+
+
+class AddNounFrame(QFrame, Ui_AddNounFrame):
+    def __init__(self, parent=None):
+        QFrame.__init__(self, parent)
+        self.setupUi(self)
+
+    
+
+
+class NotImplementedException(Exception):
+    pass
 
 
 def main():

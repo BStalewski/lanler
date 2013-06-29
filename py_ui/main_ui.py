@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/main.ui'
 #
-# Created: Sat Jun 29 13:32:46 2013
+# Created: Sat Jun 29 23:25:48 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -41,15 +41,15 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         spacerItem1 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem1)
-        self.pushButton_2 = QtGui.QPushButton(self.centralwidget)
-        self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
-        self.verticalLayout.addWidget(self.pushButton_2)
-        self.pushButton = QtGui.QPushButton(self.centralwidget)
-        self.pushButton.setObjectName(_fromUtf8("pushButton"))
-        self.verticalLayout.addWidget(self.pushButton)
-        self.pushButton_3 = QtGui.QPushButton(self.centralwidget)
-        self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
-        self.verticalLayout.addWidget(self.pushButton_3)
+        self.addPoSButton = QtGui.QPushButton(self.centralwidget)
+        self.addPoSButton.setObjectName(_fromUtf8("addPoSButton"))
+        self.verticalLayout.addWidget(self.addPoSButton)
+        self.testButton = QtGui.QPushButton(self.centralwidget)
+        self.testButton.setObjectName(_fromUtf8("testButton"))
+        self.verticalLayout.addWidget(self.testButton)
+        self.optionsButton = QtGui.QPushButton(self.centralwidget)
+        self.optionsButton.setObjectName(_fromUtf8("optionsButton"))
+        self.verticalLayout.addWidget(self.optionsButton)
         spacerItem2 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem2)
         self.horizontalLayout.addLayout(self.verticalLayout)
@@ -70,7 +70,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "Lanler", None))
-        self.pushButton_2.setText(_translate("MainWindow", "Dodaj ...", None))
-        self.pushButton.setText(_translate("MainWindow", "Test", None))
-        self.pushButton_3.setText(_translate("MainWindow", "Opcje", None))
+        self.addPoSButton.setText(_translate("MainWindow", "Dodaj ...", None))
+        self.testButton.setText(_translate("MainWindow", "Test", None))
+        self.optionsButton.setText(_translate("MainWindow", "Opcje", None))
 
