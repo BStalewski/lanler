@@ -14,7 +14,7 @@ from py_ui.choose_user_ui import Ui_ChooseUserDialog
 from py_ui.new_user_ui import Ui_NewUserDialog
 from py_ui.choose_add_pos_ui import Ui_AddPoSFrame
 from py_ui.options_ui import Ui_OptionsFrame
-from py_ui.add_noun_ui import Ui_AddNounFrame
+from py_ui.add_noun_ui import Ui_AddNounDialog
 
 
 class Gui(QMainWindow, Ui_MainWindow):
@@ -217,13 +217,28 @@ class OptionsFrame(QFrame, Ui_OptionsFrame):
         raise NotImplementedException('remove user')
 
 
-class AddNounFrame(QFrame, Ui_AddNounFrame):
-    def __init__(self, parent=None):
+class AddNounDialog(QDialog, Ui_AddNounDialog):
+    def __init__(self, model, parent=None):
         QFrame.__init__(self, parent)
         self.setupUi(self)
+        self.model = model
 
-    
+    def accept(self):
+        polish = self.polishLineEdit.text()
+        portuguese = self.portugueseLineEdit.text()
+        if self.validate(polish, portuguese):
+            gender = self.get_gender()
+            self.model.add_noun(polish, portuguese, gender)
 
+    def get_gender(self):
+        return 'M' if self.masculineRadioButton.isChecked() else 'F'
+
+    def validate(self, polish, portuguese):
+        if polish.isEmpty() or portuguese.isEmpty():
+            QMessageBox.warning(self, u'Błąd', u'Błąd: wszystkie pola muszą być uzupełnione')
+            return False
+
+        return True
 
 class NotImplementedException(Exception):
     pass
