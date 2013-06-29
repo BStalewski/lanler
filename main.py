@@ -4,8 +4,8 @@
 import sys
 
 from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import (QMainWindow, QAction, QDialog, QApplication,
-QRadioButton, QCheckBox)
+from PyQt4.QtGui import (QAction, QApplication, QCheckBox, QDialog,
+QMainWindow, QMessageBox, QRadioButton,)
 
 from model import Model
 
@@ -105,7 +105,7 @@ class ChooseUserDialog(QDialog, Ui_ChooseUserDialog):
                 return radio_button.text()
 
     def create_new_user(self):
-        new_user_dialog = NewUserDialog(model, self)
+        new_user_dialog = NewUserDialog(self.model, self)
 
         if new_user_dialog.exec_():
             print 'import from: '
@@ -125,6 +125,7 @@ class NewUserDialog(QDialog, Ui_NewUserDialog):
         self.setupUi(self)
 
         self.check_boxes = []
+        self.model = model
         for name in self.model.get_users_names():
             check_box = QCheckBox(name, self)
             self.importGroupBoxLayout.addWidget(check_box)
@@ -135,6 +136,12 @@ class NewUserDialog(QDialog, Ui_NewUserDialog):
 
     def get_import_users(self):
         return [checkbox.text().__str__() for checkbox in self.check_boxes if checkbox.isChecked()]
+
+    def accept(self):
+        if self.model.is_user_name_unique(self.get_user_name()):
+            QDialog.accept(self)
+        else:
+            QMessageBox.warning(self, u'Błąd', u'Błąd: nazwa użytkownika musi być unikalna')
 
 
 def main():

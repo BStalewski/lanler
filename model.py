@@ -14,3 +14,8 @@ class Model:
     def create_user(self, qname, import_user_names):
         name = qname.__str__()
         self.db.create_user(name, import_user_names)
+
+    def is_user_name_unique(self, qname):
+        user_name = qname.__str__()
+        return user_name not in self.get_users_names()
+
