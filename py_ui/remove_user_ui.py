@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/remove_user.ui'
 #
-# Created: Sun Jun 30 18:25:59 2013
+# Created: Sun Jun 30 20:02:46 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,9 +31,9 @@ class Ui_Dialog(object):
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.verticalLayout = QtGui.QVBoxLayout()
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.groupBox = QtGui.QGroupBox(Dialog)
-        self.groupBox.setObjectName(_fromUtf8("groupBox"))
-        self.verticalLayout.addWidget(self.groupBox)
+        self.removeUserGroupBox = QtGui.QGroupBox(Dialog)
+        self.removeUserGroupBox.setObjectName(_fromUtf8("removeUserGroupBox"))
+        self.verticalLayout.addWidget(self.removeUserGroupBox)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
         self.buttonBox = QtGui.QDialogButtonBox(Dialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
@@ -48,5 +48,5 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(_translate("Dialog", "Remove user", None))
-        self.groupBox.setTitle(_translate("Dialog", "Usuń użytkownika:", None))
+        self.removeUserGroupBox.setTitle(_translate("Dialog", "Usuń użytkownika:", None))
 

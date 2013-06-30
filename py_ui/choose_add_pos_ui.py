@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/choose_add_pos.ui'
 #
-# Created: Sun Jun 30 18:25:58 2013
+# Created: Sun Jun 30 20:02:45 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_AddPoSFrame(object):
     def setupUi(self, AddPoSFrame):
         AddPoSFrame.setObjectName(_fromUtf8("AddPoSFrame"))
-        AddPoSFrame.resize(213, 240)
+        AddPoSFrame.resize(133, 160)
         AddPoSFrame.setFrameShape(QtGui.QFrame.StyledPanel)
         AddPoSFrame.setFrameShadow(QtGui.QFrame.Raised)
         self.horizontalLayout = QtGui.QHBoxLayout(AddPoSFrame)

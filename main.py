@@ -17,6 +17,7 @@ from py_ui.choose_add_pos_ui import Ui_AddPoSFrame
 from py_ui.add_noun_ui import Ui_AddNounDialog
 
 from py_ui.choose_dictionary_ui import Ui_ChooseDictionaryFrame
+from py_ui.pt_pl_dictionary_ui import Ui_PtPlDictionaryFrame
 from py_ui.options_ui import Ui_OptionsFrame
 
 
@@ -89,9 +90,18 @@ class Gui(QMainWindow, Ui_MainWindow):
     def options(self):
         return OptionsFrame(self)
 
+    @change_right_frame
+    def show_frame(self, frame):
+        return frame
+
     def show_logged_user(self, user_name):
         msg = u'Użytkownik: ' + user_name
         self.userName.showMessage(msg)
+
+
+class RightFrame():
+    def __init__(self, main_window):
+        self.main_window = main_window
 
 
 class ChooseUserDialog(QDialog, Ui_ChooseUserDialog):
@@ -156,9 +166,10 @@ class NewUserDialog(QDialog, Ui_NewUserDialog):
             QMessageBox.warning(self, u'Błąd', u'Błąd: nazwa użytkownika musi być unikalna')
 
 
-class AddPoSFrame(QFrame, Ui_AddPoSFrame):
+class AddPoSFrame(QFrame, Ui_AddPoSFrame, RightFrame):
     def __init__(self, model, parent):
         QFrame.__init__(self, parent)
+        RightFrame.__init__(self, parent)
         self.setupUi(self)
         self.connect(self.addNounButton, QtCore.SIGNAL('clicked()'), self.add_noun)
         self.connect(self.addVerbButton, QtCore.SIGNAL('clicked()'), self.add_verb)
@@ -184,9 +195,10 @@ class AddPoSFrame(QFrame, Ui_AddPoSFrame):
         raise NotImplementedException('add pronoun')
 
 
-class OptionsFrame(QFrame, Ui_OptionsFrame):
+class OptionsFrame(QFrame, Ui_OptionsFrame, RightFrame):
     def __init__(self, parent):
         QFrame.__init__(self, parent)
+        RightFrame.__init__(self, parent)
         self.setupUi(self)
         self.connect(self.changeUserButton, QtCore.SIGNAL('clicked()'), self.change_user)
         self.connect(self.removeUserButton, QtCore.SIGNAL('clicked()'), self.remove_user)
@@ -200,9 +212,10 @@ class OptionsFrame(QFrame, Ui_OptionsFrame):
         raise NotImplementedException('remove user')
 
 
-class ChooseDictionaryFrame(QFrame, Ui_ChooseDictionaryFrame):
+class ChooseDictionaryFrame(QFrame, Ui_ChooseDictionaryFrame, RightFrame):
     def __init__(self, model, parent):
         QFrame.__init__(self, parent)
+        RightFrame.__init__(self, parent)
         self.setupUi(self)
         self.connect(self.plPtDictionaryButton, QtCore.SIGNAL('clicked()'), self.pl_pt_dictionary)
         self.connect(self.ptPlDictionaryButton, QtCore.SIGNAL('clicked()'), self.pt_pl_dictionary)
@@ -212,7 +225,19 @@ class ChooseDictionaryFrame(QFrame, Ui_ChooseDictionaryFrame):
         raise NotImplementedException('pl_pt_dictionary')
 
     def pt_pl_dictionary(self):
-        raise NotImplementedException('pt_pl_dictionary')
+        self.main_window.show_frame(PtPlDictionaryFrame(self.model, self.parent()))
+
+
+class PtPlDictionaryFrame(QFrame, Ui_PtPlDictionaryFrame, RightFrame):
+    def __init__(self, model, parent):
+        QFrame.__init__(self, parent)
+        RightFrame.__init__(self, parent)
+        self.setupUi(self)
+        self.connect(self.backButton, QtCore.SIGNAL('clicked()'), self.back)
+        self.model = model
+
+    def back(self):
+        raise NotImplementedException('back')
 
 
 class AddNounDialog(QDialog, Ui_AddNounDialog):
