@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/main.ui'
 #
-# Created: Sun Jun 30 00:10:37 2013
+# Created: Sun Jun 30 18:02:02 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -47,6 +47,9 @@ class Ui_MainWindow(object):
         self.testButton = QtGui.QPushButton(self.centralwidget)
         self.testButton.setObjectName(_fromUtf8("testButton"))
         self.verticalLayout.addWidget(self.testButton)
+        self.dictionaryButton = QtGui.QPushButton(self.centralwidget)
+        self.dictionaryButton.setObjectName(_fromUtf8("dictionaryButton"))
+        self.verticalLayout.addWidget(self.dictionaryButton)
         self.optionsButton = QtGui.QPushButton(self.centralwidget)
         self.optionsButton.setObjectName(_fromUtf8("optionsButton"))
         self.verticalLayout.addWidget(self.optionsButton)
@@ -64,6 +67,9 @@ class Ui_MainWindow(object):
         self.userName = QtGui.QStatusBar(MainWindow)
         self.userName.setObjectName(_fromUtf8("userName"))
         MainWindow.setStatusBar(self.userName)
+        self.toolBar = QtGui.QToolBar(MainWindow)
+        self.toolBar.setObjectName(_fromUtf8("toolBar"))
+        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -72,5 +78,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Lanler", None))
         self.addPoSButton.setText(_translate("MainWindow", "Dodaj ...", None))
         self.testButton.setText(_translate("MainWindow", "Test", None))
+        self.dictionaryButton.setText(_translate("MainWindow", "Słownik", None))
         self.optionsButton.setText(_translate("MainWindow", "Opcje", None))
+        self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar", None))
 
