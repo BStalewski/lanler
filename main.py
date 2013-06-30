@@ -12,9 +12,12 @@ from model import Model
 from py_ui.main_ui import Ui_MainWindow
 from py_ui.choose_user_ui import Ui_ChooseUserDialog
 from py_ui.new_user_ui import Ui_NewUserDialog
+
 from py_ui.choose_add_pos_ui import Ui_AddPoSFrame
-from py_ui.options_ui import Ui_OptionsFrame
 from py_ui.add_noun_ui import Ui_AddNounDialog
+
+from py_ui.choose_dictionary_ui import Ui_ChooseDictionaryFrame
+from py_ui.options_ui import Ui_OptionsFrame
 
 
 class Gui(QMainWindow, Ui_MainWindow):
@@ -37,33 +40,10 @@ class Gui(QMainWindow, Ui_MainWindow):
         self.show()
 
     def init_menu_bar(self):
-        '''
         menubar = self.menuBar()
         file_menu = menubar.addMenu(u'&Plik')
-        run_menu = menubar.addMenu(u'&Wykonaj')
-
-        open_image_action = self.create_action(u'Otwórz obraz', u'Ctrl+O',
-                                               u'Wczytaj nowy obraz', self.open_image)
-        exit_action = self.create_action(u'Exit', u'Ctrl+Q', u'Zakończ program', self.close)
-        file_menu.addActions([open_image_action, exit_action])
-
-        thresholding_action = self.create_action(u'Progowanie', u'Ctrl+P', u'Wykonaj algorytm progowania',
-                                                 self.thresholding, False)
-        ml_em_action = self.create_action(u'Algorytm ML-EM', u'Ctrl+M',
-                                          u'Wykonaj algorytm ML-EM', self.ml_em, False)
-        repeat_action = self.create_action(u'Powtórz ostatni algorytm', u'Ctrl+R',
-                                           u'Wykonaj ponownie poprzedni algorytm z tym samymi ustawieniami',
-                                           self.repeat, False)
-        run_menu.addActions([thresholding_action, ml_em_action, repeat_action])
-
-        self.actions = {
-            u'open': open_image_action,
-            u'exit': exit_action,
-            u'thresholding': thresholding_action,
-            u'ml_em': ml_em_action,
-            u'repeat': repeat_action,
-        }
-        '''
+        exit_action = self.create_action(u'Zakończ', u'Ctrl+Q', u'Zakończ program', self.close)
+        file_menu.addAction(exit_action)
 
     def create_action(self, name, shortcut, status_tip, callback, enabled=True):
         action = QAction(name, self)
@@ -103,7 +83,7 @@ class Gui(QMainWindow, Ui_MainWindow):
 
     @change_right_frame
     def dictionary(self):
-        raise NotImplementedException('dictionary')
+        return ChooseDictionaryFrame(self.model, self)
 
     @change_right_frame
     def options(self):
@@ -144,15 +124,11 @@ class ChooseUserDialog(QDialog, Ui_ChooseUserDialog):
         new_user_dialog = NewUserDialog(self.model, self)
 
         if new_user_dialog.exec_():
-            print 'import from: '
-            print new_user_dialog.get_import_users()
             new_user_name = new_user_dialog.get_user_name()
             import_users = new_user_dialog.get_import_users()
             self.model.create_user(new_user_name, import_users)
             self.add_user(new_user_name)
             self.radio_buttons[-1].setChecked(True)
-        else:
-            print 'no_add_new_user'
 
 
 class NewUserDialog(QDialog, Ui_NewUserDialog):
@@ -209,7 +185,7 @@ class AddPoSFrame(QFrame, Ui_AddPoSFrame):
 
 
 class OptionsFrame(QFrame, Ui_OptionsFrame):
-    def __init__(self, parent=None):
+    def __init__(self, parent):
         QFrame.__init__(self, parent)
         self.setupUi(self)
         self.connect(self.changeUserButton, QtCore.SIGNAL('clicked()'), self.change_user)
@@ -222,6 +198,21 @@ class OptionsFrame(QFrame, Ui_OptionsFrame):
     def remove_user(self):
         print 'remove user'
         raise NotImplementedException('remove user')
+
+
+class ChooseDictionaryFrame(QFrame, Ui_ChooseDictionaryFrame):
+    def __init__(self, model, parent):
+        QFrame.__init__(self, parent)
+        self.setupUi(self)
+        self.connect(self.plPtDictionaryButton, QtCore.SIGNAL('clicked()'), self.pl_pt_dictionary)
+        self.connect(self.ptPlDictionaryButton, QtCore.SIGNAL('clicked()'), self.pt_pl_dictionary)
+        self.model = model
+
+    def pl_pt_dictionary(self):
+        raise NotImplementedException('pl_pt_dictionary')
+
+    def pt_pl_dictionary(self):
+        raise NotImplementedException('pt_pl_dictionary')
 
 
 class AddNounDialog(QDialog, Ui_AddNounDialog):

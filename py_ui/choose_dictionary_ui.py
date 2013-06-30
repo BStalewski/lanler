@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/choose_dictionary.ui'
 #
-# Created: Sun Jun 30 18:17:10 2013
+# Created: Sun Jun 30 18:25:58 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -23,13 +23,13 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_Frame(object):
-    def setupUi(self, Frame):
-        Frame.setObjectName(_fromUtf8("Frame"))
-        Frame.resize(212, 174)
-        Frame.setFrameShape(QtGui.QFrame.StyledPanel)
-        Frame.setFrameShadow(QtGui.QFrame.Raised)
-        self.horizontalLayout = QtGui.QHBoxLayout(Frame)
+class Ui_ChooseDictionaryFrame(object):
+    def setupUi(self, ChooseDictionaryFrame):
+        ChooseDictionaryFrame.setObjectName(_fromUtf8("ChooseDictionaryFrame"))
+        ChooseDictionaryFrame.resize(212, 174)
+        ChooseDictionaryFrame.setFrameShape(QtGui.QFrame.StyledPanel)
+        ChooseDictionaryFrame.setFrameShadow(QtGui.QFrame.Raised)
+        self.horizontalLayout = QtGui.QHBoxLayout(ChooseDictionaryFrame)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
@@ -37,10 +37,10 @@ class Ui_Frame(object):
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         spacerItem1 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem1)
-        self.plPtDictionaryButton = QtGui.QPushButton(Frame)
+        self.plPtDictionaryButton = QtGui.QPushButton(ChooseDictionaryFrame)
         self.plPtDictionaryButton.setObjectName(_fromUtf8("plPtDictionaryButton"))
         self.verticalLayout.addWidget(self.plPtDictionaryButton)
-        self.ptPlDictionaryButton = QtGui.QPushButton(Frame)
+        self.ptPlDictionaryButton = QtGui.QPushButton(ChooseDictionaryFrame)
         self.ptPlDictionaryButton.setObjectName(_fromUtf8("ptPlDictionaryButton"))
         self.verticalLayout.addWidget(self.ptPlDictionaryButton)
         spacerItem2 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
@@ -49,11 +49,11 @@ class Ui_Frame(object):
         spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem3)
 
-        self.retranslateUi(Frame)
-        QtCore.QMetaObject.connectSlotsByName(Frame)
+        self.retranslateUi(ChooseDictionaryFrame)
+        QtCore.QMetaObject.connectSlotsByName(ChooseDictionaryFrame)
 
-    def retranslateUi(self, Frame):
-        Frame.setWindowTitle(_translate("Frame", "Frame", None))
-        self.plPtDictionaryButton.setText(_translate("Frame", "Polsko - portugalski", None))
-        self.ptPlDictionaryButton.setText(_translate("Frame", "Portugalsko - polski", None))
+    def retranslateUi(self, ChooseDictionaryFrame):
+        ChooseDictionaryFrame.setWindowTitle(_translate("ChooseDictionaryFrame", "Frame", None))
+        self.plPtDictionaryButton.setText(_translate("ChooseDictionaryFrame", "Polsko - portugalski", None))
+        self.ptPlDictionaryButton.setText(_translate("ChooseDictionaryFrame", "Portugalsko - polski", None))
 

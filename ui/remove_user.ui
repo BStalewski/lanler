@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QGroupBox" name="groupBox">
+      <widget class="QGroupBox" name="removeUserGroupBox">
        <property name="title">
         <string>Usuń użytkownika:</string>
        </property>
