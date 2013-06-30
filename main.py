@@ -76,8 +76,9 @@ class Gui(QMainWindow, Ui_MainWindow):
         dialog = ChooseUserDialog(self.model, self)
 
         if dialog.exec_():
-            user_name = dialog.get_chosen_user().__str__()
+            user_name = dialog.get_chosen_user()#.__str__()
             self.show_logged_user(user_name)
+            self.model.set_current_user(user_name)
             return True
 
         return False
@@ -93,7 +94,7 @@ class Gui(QMainWindow, Ui_MainWindow):
 
     @change_right_frame
     def add_pos(self):
-        return AddPoSFrame(self)
+        return AddPoSFrame(self.model, self)
 
     @change_right_frame
     def test(self):
@@ -176,17 +177,19 @@ class NewUserDialog(QDialog, Ui_NewUserDialog):
 
 
 class AddPoSFrame(QFrame, Ui_AddPoSFrame):
-    def __init__(self, parent=None):
+    def __init__(self, model, parent):
         QFrame.__init__(self, parent)
         self.setupUi(self)
         self.connect(self.addNounButton, QtCore.SIGNAL('clicked()'), self.add_noun)
         self.connect(self.addVerbButton, QtCore.SIGNAL('clicked()'), self.add_verb)
         self.connect(self.addAdjectiveButton, QtCore.SIGNAL('clicked()'), self.add_adjective)
         self.connect(self.addPronounButton, QtCore.SIGNAL('clicked()'), self.add_pronoun)
+        self.model = model
 
     def add_noun(self):
-        print 'add_noun'
-        raise NotImplementedException('add noun')
+        dialog = AddNounDialog(self)
+        if dialog.exec_():
+            self.model.add_noun(**dialog.get_fields())
 
     def add_verb(self):
         print 'add_verb'
@@ -218,27 +221,44 @@ class OptionsFrame(QFrame, Ui_OptionsFrame):
 
 
 class AddNounDialog(QDialog, Ui_AddNounDialog):
-    def __init__(self, model, parent=None):
+    def __init__(self, parent):
         QFrame.__init__(self, parent)
         self.setupUi(self)
-        self.model = model
 
     def accept(self):
-        polish = self.polishLineEdit.text()
-        portuguese = self.portugueseLineEdit.text()
-        if self.validate(polish, portuguese):
-            gender = self.get_gender()
-            self.model.add_noun(polish, portuguese, gender)
+        if self.validate():
+            QDialog.accept(self)
 
     def get_gender(self):
         return 'M' if self.masculineRadioButton.isChecked() else 'F'
 
-    def validate(self, polish, portuguese):
-        if polish.isEmpty() or portuguese.isEmpty():
+    def get_polish(self):
+        return self.polishLineEdit.text().trimmed()
+
+    def get_portuguese(self):
+        return self.portugueseLineEdit.text().trimmed()
+
+    def validate(self):
+        polish = self.get_polish()
+        portuguese = self.get_portuguese()
+        gender = self.get_gender()
+        if not polish or not portuguese:
             QMessageBox.warning(self, u'Błąd', u'Błąd: wszystkie pola muszą być uzupełnione')
             return False
 
+        if not gender:
+            QMessageBox.warning(self, u'Błąd', u'Błąd: niewybrany rodzaj rzeczownika')
+            return False
+
         return True
+
+    def get_fields(self):
+        return {
+            u'polish': self.get_polish(),
+            u'portuguese': self.get_portuguese(),
+            u'gender': self.get_gender(),
+        }
+
 
 class NotImplementedException(Exception):
     pass

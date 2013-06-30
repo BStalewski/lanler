@@ -14,7 +14,6 @@ class DB:
         self.users = self.db['users']
         self.words = self.db['words']
 
-        self.clean()
         if self.is_db_clean():
             print 'INIT DB'
             self.init_db()
@@ -55,6 +54,20 @@ class DB:
             u'name': name
         }
         self.users.insert(new_user)
+
+    def add_noun(self, username, polish, portuguese, gender):
+        user = self.users.find_one({'name': username})
+        if not user:
+            raise DBException('Unknown user')
+
+        new_noun = {
+            u'user': user['_id'],
+            u'polish': polish,
+            u'portuguese': portuguese,
+            u'gender': gender, 
+        }
+
+        self.words.insert(new_noun)
         
 
     @classmethod
