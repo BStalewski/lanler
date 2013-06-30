@@ -25,6 +25,7 @@ class Gui(QMainWindow, Ui_MainWindow):
 
         self.connect(self.addPoSButton, QtCore.SIGNAL('clicked()'), self.add_pos)
         self.connect(self.testButton, QtCore.SIGNAL('clicked()'), self.test)
+        self.connect(self.dictionaryButton, QtCore.SIGNAL('clicked()'), self.dictionary)
         self.connect(self.optionsButton, QtCore.SIGNAL('clicked()'), self.options)
 
         self.model = model
@@ -98,8 +99,11 @@ class Gui(QMainWindow, Ui_MainWindow):
 
     @change_right_frame
     def test(self):
-        print 'TEST'
         raise NotImplementedException('test')
+
+    @change_right_frame
+    def dictionary(self):
+        raise NotImplementedException('dictionary')
 
     @change_right_frame
     def options(self):

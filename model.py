@@ -47,21 +47,17 @@ class Model:
     def get_users_names(self):
         return self.db.get_users_names()
 
-    def create_user(self, qname, import_user_names):
-        name = qname.__str__()
+    @to_model_format
+    def create_user(self, name, import_user_names):
         self.db.create_user(name, import_user_names)
 
-    def is_user_name_unique(self, qname):
-        user_name = qname.__str__()
+    @to_model_format
+    def is_user_name_unique(self, user_name):
         return user_name not in self.get_users_names()
 
     @to_model_format
     @assert_user
     def add_noun(self, polish, portuguese, gender):
-        print 'type(polish)', type(polish)
-        #polish = qpolish.__str__()
-        #portuguese = qportuguese.__str__()
-        #gender = qgender.__str__()
         if not polish:
             raise ModelException('Polish empty')
 

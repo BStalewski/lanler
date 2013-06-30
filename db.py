@@ -38,15 +38,6 @@ class DB:
         if name in self.get_users_names():
             raise DBException('User name {0} already in db'.format(name.encode('utf-8')))
 
-        '''
-        sorted_ids = sorted([int(uid) for uid in self.data.keys()])
-        try:
-            next_id = sorted_ids[-1] + 1
-        except IndexError:
-            next_id = 1
-
-        self.data[str(next_id)] = User(next_id, name, vocabulary)
-        '''
         if vocabulary_import_users:
             raise DBException('Copying vocabulary not implemented yet')
 
