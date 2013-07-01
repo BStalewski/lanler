@@ -5,14 +5,24 @@ from user import User
 
 from pymongo import MongoClient
 
+
+NOUN = 0
+VERB = 1
+ADJECTIVE = 2
+PRONOUN = 3
+
+
 class DB:
     instance = None
 
-    def __init__(self):
+    def __init__(self, clean=False):
         self.client = MongoClient('localhost', 27017)
         self.db = self.client['lanler']
         self.users = self.db['users']
         self.words = self.db['words']
+
+        if clean:
+            self.clean()
 
         if self.is_db_clean():
             print 'INIT DB'
@@ -46,25 +56,39 @@ class DB:
         }
         self.users.insert(new_user)
 
-    def add_noun(self, username, polish, portuguese, gender):
+    def get_user(self, username):
         user = self.users.find_one({'name': username})
         if not user:
             raise DBException('Unknown user')
+        else:
+            return user
+
+
+    def add_noun(self, username, polish, portuguese, gender):
+        user = self.get_user(username)
 
         new_noun = {
             u'user': user['_id'],
             u'polish': polish,
             u'portuguese': portuguese,
+            u'pos': NOUN,
             u'gender': gender, 
         }
 
         self.words.insert(new_noun)
         
+    def get_words(self, username, sort_key=None):
+        user = self.get_user(username)
+        cursor = self.words.find({u'user': user['_id']})
+        if sort_key:
+            cursor = cursor.sort(sort_key)
+
+        return list(cursor)
 
     @classmethod
-    def get_instance(cls):
+    def get_instance(cls, clean=False):
         if not cls.instance:
-            cls.instance = DB()
+            cls.instance = DB(clean)
 
         return cls.instance
 

@@ -7,7 +7,7 @@ from PyQt4 import QtGui, QtCore
 from PyQt4.QtGui import (QAction, QApplication, QCheckBox, QDialog,
 QFrame, QMainWindow, QMessageBox, QRadioButton,)
 
-from model import Model
+from model import Model, PtPlDictionaryModel
 
 from py_ui.main_ui import Ui_MainWindow
 from py_ui.choose_user_ui import Ui_ChooseUserDialog
@@ -235,6 +235,9 @@ class PtPlDictionaryFrame(QFrame, Ui_PtPlDictionaryFrame, RightFrame):
         self.setupUi(self)
         self.connect(self.backButton, QtCore.SIGNAL('clicked()'), self.back)
         self.model = model
+
+        tablemodel = PtPlDictionaryModel(self.model.get_current_user(), self)
+        self.dictionaryTableView.setModel(tablemodel)
 
     def back(self):
         raise NotImplementedException('back')
