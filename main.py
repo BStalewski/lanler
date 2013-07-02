@@ -40,6 +40,7 @@ class Gui(QMainWindow, Ui_MainWindow):
         self.init_menu_bar()
         self.statusBar()
 
+        self.center_on_screen()
         self.show()
 
     def init_menu_bar(self):
@@ -47,6 +48,12 @@ class Gui(QMainWindow, Ui_MainWindow):
         file_menu = menubar.addMenu(u'&Plik')
         exit_action = self.create_action(u'Zakończ', u'Ctrl+Q', u'Zakończ program', self.close)
         file_menu.addAction(exit_action)
+
+    def center_on_screen(self):
+        screen_geometry = QApplication.desktop().screenGeometry()
+        x = (screen_geometry.width() - self.width()) / 2
+        y = (screen_geometry.height() - self.height()) / 2
+        self.move(x, y)
 
     def create_action(self, name, shortcut, status_tip, callback, enabled=True):
         action = QAction(name, self)
@@ -309,6 +316,7 @@ def main():
     app = QApplication(sys.argv)
     model = Model()
     gui = Gui(model)
+
     if not gui.choose_user():
         gui.close()
     else:
