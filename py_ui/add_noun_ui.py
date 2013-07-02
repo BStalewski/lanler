@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/add_noun.ui'
 #
-# Created: Sun Jun 30 20:02:45 2013
+# Created: Tue Jul  2 08:29:12 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!

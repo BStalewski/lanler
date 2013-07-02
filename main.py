@@ -7,7 +7,7 @@ from PyQt4 import QtGui, QtCore
 from PyQt4.QtGui import (QAction, QApplication, QCheckBox, QDialog,
 QFrame, QMainWindow, QMessageBox, QRadioButton,)
 
-from model import Model, PtPlDictionaryModel
+from model import Model, PtPlDictionaryModel, PlPtDictionaryModel
 
 from py_ui.main_ui import Ui_MainWindow
 from py_ui.choose_user_ui import Ui_ChooseUserDialog
@@ -19,6 +19,8 @@ from py_ui.add_noun_ui import Ui_AddNounDialog
 from py_ui.choose_dictionary_ui import Ui_ChooseDictionaryFrame
 from py_ui.pt_pl_dictionary_ui import Ui_PtPlDictionaryFrame
 from py_ui.options_ui import Ui_OptionsFrame
+
+from py_ui.pt_pl_dictionary_ui import _translate
 
 
 class Gui(QMainWindow, Ui_MainWindow):
@@ -58,7 +60,7 @@ class Gui(QMainWindow, Ui_MainWindow):
         dialog = ChooseUserDialog(self.model, self)
 
         if dialog.exec_():
-            user_name = dialog.get_chosen_user()#.__str__()
+            user_name = dialog.get_chosen_user()
             self.show_logged_user(user_name)
             self.model.set_current_user(user_name)
             return True
@@ -222,7 +224,7 @@ class ChooseDictionaryFrame(QFrame, Ui_ChooseDictionaryFrame, RightFrame):
         self.model = model
 
     def pl_pt_dictionary(self):
-        raise NotImplementedException('pl_pt_dictionary')
+        self.main_window.show_frame(PlPtDictionaryFrame(self.model, self.parent()))
 
     def pt_pl_dictionary(self):
         self.main_window.show_frame(PtPlDictionaryFrame(self.model, self.parent()))
@@ -238,6 +240,22 @@ class PtPlDictionaryFrame(QFrame, Ui_PtPlDictionaryFrame, RightFrame):
 
         tablemodel = PtPlDictionaryModel(self.model.get_current_user(), self)
         self.dictionaryTableView.setModel(tablemodel)
+
+    def back(self):
+        raise NotImplementedException('back')
+
+
+class PlPtDictionaryFrame(PtPlDictionaryFrame):
+    def __init__(self, model, parent):
+        PtPlDictionaryFrame.__init__(self, model, parent)
+
+        tablemodel = PlPtDictionaryModel(self.model.get_current_user(), self)
+        self.dictionaryTableView.setModel(tablemodel)
+    
+    def retranslateUi(self, frame):
+        Ui_PtPlDictionaryFrame.retranslateUi(self, frame)
+        frame.setWindowTitle(_translate("PlPtDictionaryFrame", "Frame", None))
+        self.label.setText(_translate("PlPtDictionaryFrame", "Słownik polsko - portugalski", None))
 
     def back(self):
         raise NotImplementedException('back')

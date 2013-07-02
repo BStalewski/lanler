@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/pt_pl_dictionary.ui'
 #
-# Created: Sun Jun 30 20:02:46 2013
+# Created: Tue Jul  2 08:29:14 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -43,6 +43,7 @@ class Ui_PtPlDictionaryFrame(object):
         self.dictionaryTableView = QtGui.QTableView(PtPlDictionaryFrame)
         self.dictionaryTableView.setSelectionMode(QtGui.QAbstractItemView.NoSelection)
         self.dictionaryTableView.setObjectName(_fromUtf8("dictionaryTableView"))
+        self.dictionaryTableView.verticalHeader().setVisible(False)
         self.verticalLayout.addWidget(self.dictionaryTableView)
         self.backButton = QtGui.QPushButton(PtPlDictionaryFrame)
         self.backButton.setObjectName(_fromUtf8("backButton"))
