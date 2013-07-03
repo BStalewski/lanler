@@ -65,8 +65,8 @@ class DeadKeyEater:
         u'A': u'À',
     }
     diaeresis_map = {
-        u'u': 'ü',
-        u'U': 'Ü',
+        u'u': u'ü',
+        u'U': u'Ü',
     }
     keys_maps = {
         u'~': tilde_map,
