@@ -5,7 +5,8 @@
 dead_keys = {u'~', u'^', u'´', u'`', u'¨', }
 
 def map_pl_to_br(msg):
-    msg_br_layout = LayoutMapper().change_layout(msg)
+    next_to_last_index = len(msg) - 2
+    msg_br_layout = LayoutMapper().change_layout(msg, [next_to_last_index])
     return DeadKeyEater().process_msg(msg_br_layout)
 
 
@@ -22,13 +23,19 @@ class LayoutMapper:
         u'^': u'¨',
     }
 
-    def change_layout(self, msg):
+    def change_layout(self, msg, circumflex_positions=None):
         mapped_pt_msg_array = []
-        for key in msg:
-            try:
-                mapped_pt_msg_array.append(self.pl_pt_kbmap[key])
-            except KeyError:
-                mapped_pt_msg_array.append(key)
+        circumflex_positions = circumflex_positions or []
+        for (i, key) in enumerate(msg):
+            if key == '^' and i in circumflex_positions:
+                mapped_key = key
+            else:
+                try:
+                    mapped_key = self.pl_pt_kbmap[key]
+                except KeyError:
+                    mapped_key = key
+
+            mapped_pt_msg_array.append(mapped_key)
 
         return u''.join(mapped_pt_msg_array)
 
