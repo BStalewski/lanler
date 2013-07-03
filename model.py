@@ -4,6 +4,8 @@
 from db import DB
 from db import NOUN, VERB, ADJECTIVE, PRONOUN
 
+from kmapper import map_pl_to_br
+
 from PyQt4.QtCore import Qt, QAbstractTableModel, QString, QVariant
 
 
@@ -17,7 +19,7 @@ def assert_user(fun):
     return wrapper
 
 def to_model_format(fun):
-    def wrapper(self, *args, **kwargs):
+    def wrapper(*args, **kwargs):
         new_args = []
         for arg in args:
             new_arg = arg.__str__() if isinstance(arg, QString) else arg
@@ -29,7 +31,7 @@ def to_model_format(fun):
             new_value = value.__str__() if isinstance(value, QString) else value
             new_kwargs[new_key] = new_value
 
-        return fun(self, *new_args, **new_kwargs)
+        return fun(*new_args, **new_kwargs)
 
     return wrapper
 
@@ -40,6 +42,11 @@ def has_preposition(pos):
 
 def add_preposition(word, gender):
     return u'o ' + word if gender == u'M' else u'a ' + word
+
+
+@to_model_format
+def pl_to_br_layout(msg):
+    return QString(map_pl_to_br(msg))
 
 
 class Model:

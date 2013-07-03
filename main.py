@@ -243,10 +243,20 @@ class PtPlDictionaryFrame(QFrame, Ui_PtPlDictionaryFrame, RightFrame):
         RightFrame.__init__(self, parent)
         self.setupUi(self)
         self.connect(self.backButton, QtCore.SIGNAL('clicked()'), self.back)
+
         self.model = model
 
         tablemodel = PtPlDictionaryModel(self.model.get_current_user(), self)
         self.dictionaryTableView.setModel(tablemodel)
+
+    def resize(self, *args):
+        try:
+            self.dictionaryTableView.setVisible(False)
+            self.dictionaryTableView.resizeColumnsToContents()
+            self.dictionaryTableView.setVisible(True)
+        except AttributeError:
+            pass
+        QFrame.resize(self, *args)
 
     def back(self):
         raise NotImplementedException('back')

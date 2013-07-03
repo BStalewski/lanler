@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/pt_pl_dictionary.ui'
 #
-# Created: Tue Jul  2 08:29:14 2013
+# Created: Wed Jul  3 23:20:07 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,10 +26,11 @@ except AttributeError:
 class Ui_PtPlDictionaryFrame(object):
     def setupUi(self, PtPlDictionaryFrame):
         PtPlDictionaryFrame.setObjectName(_fromUtf8("PtPlDictionaryFrame"))
-        PtPlDictionaryFrame.resize(240, 320)
+        PtPlDictionaryFrame.resize(276, 277)
         PtPlDictionaryFrame.setFrameShape(QtGui.QFrame.StyledPanel)
         PtPlDictionaryFrame.setFrameShadow(QtGui.QFrame.Raised)
         self.verticalLayout = QtGui.QVBoxLayout(PtPlDictionaryFrame)
+        self.verticalLayout.setSizeConstraint(QtGui.QLayout.SetDefaultConstraint)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.label = QtGui.QLabel(PtPlDictionaryFrame)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
@@ -41,6 +42,7 @@ class Ui_PtPlDictionaryFrame(object):
         self.line.setObjectName(_fromUtf8("line"))
         self.verticalLayout.addWidget(self.line)
         self.dictionaryTableView = QtGui.QTableView(PtPlDictionaryFrame)
+        self.dictionaryTableView.setMinimumSize(QtCore.QSize(0, 0))
         self.dictionaryTableView.setSelectionMode(QtGui.QAbstractItemView.NoSelection)
         self.dictionaryTableView.setObjectName(_fromUtf8("dictionaryTableView"))
         self.dictionaryTableView.verticalHeader().setVisible(False)
