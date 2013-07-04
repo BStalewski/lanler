@@ -18,6 +18,7 @@ def assert_user(fun):
 
     return wrapper
 
+
 def to_model_format(fun):
     def wrapper(*args, **kwargs):
         new_args = []
@@ -34,6 +35,34 @@ def to_model_format(fun):
         return fun(*new_args, **new_kwargs)
 
     return wrapper
+
+
+def throw_on_empty(*check_args):
+    def ext_wrapper(fun):
+        def wrapper(*args, **kwargs):
+            fun_args = fun.func_code.co_varnames
+            for arg_name in check_args:
+                if arg_name not in fun_args:
+                    raise ValueError('Argument %s is not %s()\'s argument' % (arg_name, fun.func_code.co_name))
+                index = fun_args.index(arg_name)
+                if index < len(args):
+                    value = args[index]
+                elif arg_name in kwargs:
+                    value = kwargs[arg_name]
+                else:
+                    import inspect
+                    arg_spec = inspect.get_argspec(fun)
+                    passed_args_count = len(args) + len(kwargs)
+                    value = arg_spec.defaults[index - passed_args_count + 1]
+                
+                if not value:
+                    raise ModelException(u'%s empty' % arg_name)
+
+            return fun(*args, **kwargs)
+
+        return wrapper
+    
+    return ext_wrapper
 
 
 def has_preposition(pos):
@@ -78,15 +107,27 @@ class Model:
 
     @to_model_format
     @assert_user
+    @throw_on_empty('polish', 'portuguese')
     def add_noun(self, polish, portuguese, gender):
-        if not polish:
-            raise ModelException(u'Polish empty')
-
-        if not portuguese:
-            raise ModelException(u'Portuguese empty')
-
         self.db.add_noun(self.current_user_name, polish, portuguese, gender)
 
+    @to_model_format
+    @assert_user
+    @throw_on_empty('polish', 'portuguese')
+    def add_verb(self, polish, portuguese):
+        self.db.add_verb(self.current_user_name, polish, portuguese)
+
+    @to_model_format
+    @assert_user
+    @throw_on_empty('polish', 'portuguese')
+    def add_adjective(self, polish, portuguese):
+        self.db.add_adjective(self.current_user_name, polish, portuguese)
+
+    @to_model_format
+    @assert_user
+    @throw_on_empty('polish', 'portuguese')
+    def add_pronoun(self, polish, portuguese):
+        self.db.add_pronoun(self.current_user_name, polish, portuguese)
 
 
 class DictionaryModel(QAbstractTableModel):

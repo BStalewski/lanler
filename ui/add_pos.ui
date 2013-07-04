@@ -40,7 +40,7 @@
       <widget class="QLineEdit" name="polishLineEdit"/>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="portugueseLineEdit"/>
+      <widget class="PortugueseQLineEdit" name="portugueseLineEdit"/>
      </item>
     </layout>
    </item>
@@ -56,6 +56,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PortugueseQLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">custom_widgets.portuguese_qlineedit</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

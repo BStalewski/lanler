@@ -15,6 +15,7 @@ from py_ui.new_user_ui import Ui_NewUserDialog
 
 from py_ui.choose_add_pos_ui import Ui_AddPoSFrame
 from py_ui.add_noun_ui import Ui_AddNounDialog
+from py_ui.add_pos_ui import Ui_AddPoSDialog
 
 from py_ui.choose_dictionary_ui import Ui_ChooseDictionaryFrame
 from py_ui.pt_pl_dictionary_ui import Ui_PtPlDictionaryFrame
@@ -192,16 +193,19 @@ class AddPoSFrame(QFrame, Ui_AddPoSFrame, RightFrame):
             self.model.add_noun(**dialog.get_fields())
 
     def add_verb(self):
-        print 'add_verb'
-        raise NotImplementedException('add verb')
+        dialog = AddPoSDialog(self)
+        if dialog.exec_():
+            self.model.add_verb(**dialog.get_fields())
 
     def add_adjective(self):
-        print 'add adjective'
-        raise NotImplementedException('add adjective')
+        dialog = AddPoSDialog(self)
+        if dialog.exec_():
+            self.model.add_adjective(**dialog.get_fields())
 
     def add_pronoun(self):
-        print 'add pronoun'
-        raise NotImplementedException('add pronoun')
+        dialog = AddPoSDialog(self)
+        if dialog.exec_():
+            self.model.add_pronoun(**dialog.get_fields())
 
 
 class OptionsFrame(QFrame, Ui_OptionsFrame, RightFrame):
@@ -280,7 +284,7 @@ class PlPtDictionaryFrame(PtPlDictionaryFrame):
 
 class AddNounDialog(QDialog, Ui_AddNounDialog):
     def __init__(self, parent):
-        QFrame.__init__(self, parent)
+        QDialog.__init__(self, parent)
         self.setupUi(self)
 
     def accept(self):
@@ -315,6 +319,37 @@ class AddNounDialog(QDialog, Ui_AddNounDialog):
             u'polish': self.get_polish(),
             u'portuguese': self.get_portuguese(),
             u'gender': self.get_gender(),
+        }
+
+
+class AddPoSDialog(QDialog, Ui_AddPoSDialog):
+    def __init__(self, parent):
+        QDialog.__init__(self, parent)
+        self.setupUi(self)
+
+    def accept(self):
+        if self.validate():
+            QDialog.accept(self)
+
+    def get_polish(self):
+        return self.polishLineEdit.text().trimmed()
+
+    def get_portuguese(self):
+        return self.portugueseLineEdit.text().trimmed()
+
+    def validate(self):
+        polish = self.get_polish()
+        portuguese = self.get_portuguese()
+        if not polish or not portuguese:
+            QMessageBox.warning(self, u'Błąd', u'Błąd: wszystkie pola muszą być uzupełnione')
+            return False
+
+        return True
+
+    def get_fields(self):
+        return {
+            u'polish': self.get_polish(),
+            u'portuguese': self.get_portuguese(),
         }
 
 

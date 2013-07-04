@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/add_pos.ui'
 #
-# Created: Thu Jul  4 20:35:00 2013
+# Created: Thu Jul  4 20:45:45 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -42,7 +42,7 @@ class Ui_AddPoSDialog(object):
         self.polishLineEdit = QtGui.QLineEdit(AddPoSDialog)
         self.polishLineEdit.setObjectName(_fromUtf8("polishLineEdit"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.polishLineEdit)
-        self.portugueseLineEdit = QtGui.QLineEdit(AddPoSDialog)
+        self.portugueseLineEdit = PortugueseQLineEdit(AddPoSDialog)
         self.portugueseLineEdit.setObjectName(_fromUtf8("portugueseLineEdit"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.portugueseLineEdit)
         self.verticalLayout.addLayout(self.formLayout)
@@ -62,3 +62,4 @@ class Ui_AddPoSDialog(object):
         self.polishLabel.setText(_translate("AddPoSDialog", "polski", None))
         self.portugueseLabel.setText(_translate("AddPoSDialog", "portugalski", None))
 
+from custom_widgets.portuguese_qlineedit import PortugueseQLineEdit

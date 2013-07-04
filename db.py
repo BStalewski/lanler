@@ -55,6 +55,18 @@ class DB:
         user = self.get_user(username)
         self.words.add_noun(user['_id'], polish, portuguese, gender)
         
+    def add_verb(self, username, polish, portuguese):
+        user = self.get_user(username)
+        self.words.add_pos(user['_id'], polish, portuguese, VERB)
+
+    def add_adjective(self, username, polish, portuguese):
+        user = self.get_user(username)
+        self.words.add_pos(user['_id'], polish, portuguese, ADJECTIVE)
+
+    def add_pronoun(self, username, polish, portuguese):
+        user = self.get_user(username)
+        self.words.add_pos(user['_id'], polish, portuguese, PRONOUN)
+
     def get_words(self, username, sort_key=None):
         user = self.get_user(username)
         return self.words.get_words(user['_id'], sort_key)
@@ -135,7 +147,26 @@ class WordsCollection:
         }
 
         self.words.insert(new_noun)
+
+    def add_pos(self, user_id, polish, portuguese, pos):
+        new_pos = {
+            self.USER: user_id,
+            self.POLISH: polish,
+            self.PORTUGUESE: portuguese,
+            self.POS: pos,
+        }
+
+        self.words.insert(new_pos)
         
+    def add_verb(self, user_id, polish, portuguese):
+        self.add_pos(user_id, polish, portuguese, VERB)
+
+    def add_adjective(self, user_id, polish, portuguese):
+        self.add_pos(user_id, polish, portuguese, ADJECTIVE)
+
+    def add_pronoun(self, user_id, polish, portuguese):
+        self.add_pos(user_id, polish, portuguese, PRONOUN)
+
     def get_words(self, user_id, sort_key=None):
         cursor = self.words.find({self.USER: user_id})
         if sort_key:
