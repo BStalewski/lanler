@@ -14,18 +14,12 @@ PRONOUN = 3
 
 class DB:
     instance = None
-    WORDS_USER = u'user'
-    WORDS_PL = u'polish'
-    WORDS_PT = u'portuguese'
-    WORDS_PT_PLURAL = u'pt_plural'
-    WORDS_GEN = u'gender'
-    WORDS_POS = u'pos'
 
     def __init__(self, clean=False):
         self.client = MongoClient('localhost', 27017)
         self.db = self.client['lanler']
-        self.users = self.db['users']
-        self.words = self.db['words']
+        self.users = UsersCollection(self.db['users'])
+        self.words = WordsCollection(self.db['words'])
 
         if clean:
             self.clean()
@@ -34,62 +28,36 @@ class DB:
             print 'INIT DB'
             self.init_db()
 
-    def get_users_names(self):
-        return [user['name'] for user in self.users.find()]
-
     def clean(self):
-        self.users.remove()
-        self.words.remove()
+        self.users.clean()
+        self.words.clean()
 
     def close(self):
         self.client.close()
 
     def init_db(self):
-        self.create_user(u'Gość', [])
+        self.users.init_coll()
+        self.words.init_coll()
 
     def is_db_clean(self):
-        return self.users.count() == self.words.count() == 0
+        return self.users.is_coll_clean() and self.words.is_coll_clean()
 
     def create_user(self, name, vocabulary_import_users):
-        if name in self.get_users_names():
-            raise DBException('User name {0} already in db'.format(name.encode('utf-8')))
-
-        if vocabulary_import_users:
-            raise DBException('Copying vocabulary not implemented yet')
-
-        new_user = {
-            u'name': name
-        }
-        self.users.insert(new_user)
+        self.users.create_user(name, vocabulary_import_users)
 
     def get_user(self, username):
-        user = self.users.find_one({'name': username})
-        if not user:
-            raise DBException('Unknown user')
-        else:
-            return user
+        return self.users.get_user(username)
 
+    def get_users_names(self):
+        return self.users.get_users_names()
 
     def add_noun(self, username, polish, portuguese, gender):
         user = self.get_user(username)
-
-        new_noun = {
-            u'user': user['_id'],
-            u'polish': polish,
-            u'portuguese': portuguese,
-            u'gender': gender, 
-            u'pos': NOUN,
-        }
-
-        self.words.insert(new_noun)
+        self.words.add_noun(user['_id'], polish, portuguese, gender)
         
     def get_words(self, username, sort_key=None):
         user = self.get_user(username)
-        cursor = self.words.find({u'user': user['_id']})
-        if sort_key:
-            cursor = cursor.sort(sort_key)
-
-        return list(cursor)
+        return self.words.get_words(user['_id'], sort_key)
 
     @classmethod
     def get_instance(cls, clean=False):
@@ -169,7 +137,6 @@ class WordsCollection:
         self.words.insert(new_noun)
         
     def get_words(self, user_id, sort_key=None):
-        user = self.get_user(username)
         cursor = self.words.find({self.USER: user_id})
         if sort_key:
             cursor = cursor.sort(sort_key)
@@ -179,3 +146,4 @@ class WordsCollection:
 
 class DBException(Exception):
     pass
+
