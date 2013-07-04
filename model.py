@@ -90,6 +90,11 @@ class Model:
 
 
 class DictionaryModel(QAbstractTableModel):
+    POLISH_KEY = u'polish'
+    PORTUGUESE_KEY = u'portuguese'
+    POLISH_NAME = u'polski'
+    PORTUGUESE_NAME = u'portugalski'
+
     @to_model_format
     def __init__(self, user, parent):
         QAbstractTableModel.__init__(self, parent)
@@ -103,7 +108,7 @@ class DictionaryModel(QAbstractTableModel):
         self.portuguese_index = self.get_portuguese_index()
 
     def get_portuguese_index(self):
-        return self.columns_keys.index(u'portuguese')
+        return self.columns_keys.index(DictionaryModel.PORTUGUESE_KEY)
 
     def get_columns_keys(self):
         raise ModelException()
@@ -141,29 +146,30 @@ class DictionaryModel(QAbstractTableModel):
 
 
 class PtPlDictionaryModel(DictionaryModel):
-    sort_key = u'portuguese'
+    sort_key = DictionaryModel.PORTUGUESE_KEY
 
     def __init__(self, user, parent):
         DictionaryModel.__init__(self, user, parent)
 
     def get_columns_keys(self):
-        return [u'portuguese', u'polish']
+        return [self.PORTUGUESE_KEY, self.POLISH_KEY]
 
     def get_columns_names(self):
-        return [u'portugalski', u'polski']
+        return [self.PORTUGUESE_NAME, self.POLISH_NAME]
 
 
 class PlPtDictionaryModel(DictionaryModel):
-    sort_key = u'polish'
+    sort_key = DictionaryModel.POLISH_KEY
 
     def __init__(self, user, parent):
         DictionaryModel.__init__(self, user, parent)
 
     def get_columns_keys(self):
-        return [u'polish', u'portuguese']
+        return [self.POLISH_KEY, self.PORTUGUESE_KEY]
 
     def get_columns_names(self):
-        return [u'portugalski', u'polski']
+        return [self.POLISH_NAME, self.PORTUGUESE_NAME]
+
 
 class ModelException(Exception):
     pass
