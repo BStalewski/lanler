@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/choose_dictionary.ui'
 #
-# Created: Sun Jul 14 01:14:35 2013
+# Created: Sun Jul 14 01:15:29 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
