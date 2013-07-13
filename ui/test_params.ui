@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>244</width>
-    <height>449</height>
+    <width>224</width>
+    <height>518</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -162,6 +162,25 @@
        <zorder>verbCheckBox</zorder>
        <zorder>nounCheckBox</zorder>
        <zorder>horizontalLayoutWidget_2</zorder>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Liczba słów:</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QSpinBox" name="spinBox">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>999999</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
     </layout>
