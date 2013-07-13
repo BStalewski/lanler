@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/test_params.ui'
 #
-# Created: Sun Jul 14 00:25:45 2013
+# Created: Sun Jul 14 01:09:41 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_TestParamsDialog(object):
     def setupUi(self, TestParamsDialog):
         TestParamsDialog.setObjectName(_fromUtf8("TestParamsDialog"))
-        TestParamsDialog.resize(244, 442)
+        TestParamsDialog.resize(244, 449)
         self.verticalLayout = QtGui.QVBoxLayout(TestParamsDialog)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.verticalLayout_2 = QtGui.QVBoxLayout()
@@ -85,10 +85,15 @@ class Ui_TestParamsDialog(object):
         self.pronounCheckBox.setChecked(True)
         self.pronounCheckBox.setObjectName(_fromUtf8("pronounCheckBox"))
         self.verticalLayout_4.addWidget(self.pronounCheckBox)
-        self.allPosCheckBox = QtGui.QCheckBox(self.posChooseGroupBox)
-        self.allPosCheckBox.setChecked(True)
-        self.allPosCheckBox.setObjectName(_fromUtf8("allPosCheckBox"))
-        self.verticalLayout_4.addWidget(self.allPosCheckBox)
+        self.horizontalLayout_2 = QtGui.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.checkAllPosPushButton = QtGui.QPushButton(self.posChooseGroupBox)
+        self.checkAllPosPushButton.setObjectName(_fromUtf8("checkAllPosPushButton"))
+        self.horizontalLayout_2.addWidget(self.checkAllPosPushButton)
+        self.uncheckAllPosPushButton = QtGui.QPushButton(self.posChooseGroupBox)
+        self.uncheckAllPosPushButton.setObjectName(_fromUtf8("uncheckAllPosPushButton"))
+        self.horizontalLayout_2.addWidget(self.uncheckAllPosPushButton)
+        self.verticalLayout_4.addLayout(self.horizontalLayout_2)
         self.verticalLayout_2.addWidget(self.posChooseGroupBox)
         self.verticalLayout.addLayout(self.verticalLayout_2)
         self.buttonBox = QtGui.QDialogButtonBox(TestParamsDialog)
@@ -111,11 +116,12 @@ class Ui_TestParamsDialog(object):
         self.dateConstraintGroupBox.setTitle(_translate("TestParamsDialog", "Data ostatniej modyfikacji:", None))
         self.noDateConstraintRadioButton.setText(_translate("TestParamsDialog", "Brak ograniczenia", None))
         self.yesDateConstraintRadioButton.setText(_translate("TestParamsDialog", "Niewcześniej niż", None))
-        self.daysAgoSpinBox.setSuffix(_translate("TestParamsDialog", "dni temu", None))
+        self.daysAgoSpinBox.setSuffix(_translate("TestParamsDialog", " dni temu", None))
         self.posChooseGroupBox.setTitle(_translate("TestParamsDialog", "Części mowy:", None))
         self.nounCheckBox.setText(_translate("TestParamsDialog", "Rzeczowniki", None))
         self.verbCheckBox.setText(_translate("TestParamsDialog", "Czasowniki", None))
         self.adjectiveCheckBox.setText(_translate("TestParamsDialog", "Przymiotniki", None))
         self.pronounCheckBox.setText(_translate("TestParamsDialog", "Zaimki", None))
-        self.allPosCheckBox.setText(_translate("TestParamsDialog", "Wszystkie", None))
+        self.checkAllPosPushButton.setText(_translate("TestParamsDialog", "Zaznacz", None))
+        self.uncheckAllPosPushButton.setText(_translate("TestParamsDialog", "Odznacz", None))
 

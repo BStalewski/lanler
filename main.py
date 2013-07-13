@@ -359,7 +359,24 @@ class TestParamsDialog(QDialog, Ui_TestParamsDialog):
     def __init__(self, parent):
         QDialog.__init__(self, parent)
         self.setupUi(self)
-        self.connect(self.dateConstraintGroupBox, QtCore.SIGNAL('clicked(bool)'), self.date_constraint_changed)
+        self.pos_checkboxes = [
+            self.nounCheckBox,
+            self.verbCheckBox,
+            self.adjectiveCheckBox,
+            self.pronounCheckBox,
+        ]
+        self.connect(self.checkAllPosPushButton, QtCore.SIGNAL('clicked()'), self.check_all)
+        self.connect(self.uncheckAllPosPushButton, QtCore.SIGNAL('clicked()'), self.uncheck_all)
+
+    def set_all_pos_checkboxes(self, checked):
+        for checkbox in self.pos_checkboxes:
+            checkbox.setChecked(checked)
+
+    def check_all(self):
+        self.set_all_pos_checkboxes(True)
+
+    def uncheck_all(self):
+        self.set_all_pos_checkboxes(False)
 
 
 class NotImplementedException(Exception):

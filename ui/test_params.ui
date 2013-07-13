@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>244</width>
-    <height>442</height>
+    <height>449</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,7 +76,7 @@
              <bool>false</bool>
             </property>
             <property name="suffix">
-             <string>dni temu</string>
+             <string> dni temu</string>
             </property>
             <property name="minimum">
              <number>1</number>
@@ -138,14 +138,22 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="allPosCheckBox">
-          <property name="text">
-           <string>Wszystkie</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QPushButton" name="checkAllPosPushButton">
+            <property name="text">
+             <string>Zaznacz</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="uncheckAllPosPushButton">
+            <property name="text">
+             <string>Odznacz</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
        <zorder>dateConstraintGroupBox</zorder>
@@ -153,7 +161,7 @@
        <zorder>pronounCheckBox</zorder>
        <zorder>verbCheckBox</zorder>
        <zorder>nounCheckBox</zorder>
-       <zorder>allPosCheckBox</zorder>
+       <zorder>horizontalLayoutWidget_2</zorder>
       </widget>
      </item>
     </layout>
