@@ -21,6 +21,8 @@ from py_ui.choose_dictionary_ui import Ui_ChooseDictionaryFrame
 from py_ui.pt_pl_dictionary_ui import Ui_PtPlDictionaryFrame
 from py_ui.options_ui import Ui_OptionsFrame
 
+from py_ui.test_params_ui import Ui_TestParamsDialog
+
 from py_ui.pt_pl_dictionary_ui import _translate
 
 
@@ -90,7 +92,7 @@ class Gui(QMainWindow, Ui_MainWindow):
 
     @change_right_frame
     def test(self):
-        raise NotImplementedException('test')
+        return TestParamsDialog(self)
 
     @change_right_frame
     def dictionary(self):
@@ -351,6 +353,13 @@ class AddPoSDialog(QDialog, Ui_AddPoSDialog):
             u'polish': self.get_polish(),
             u'portuguese': self.get_portuguese(),
         }
+
+
+class TestParamsDialog(QDialog, Ui_TestParamsDialog):
+    def __init__(self, parent):
+        QDialog.__init__(self, parent)
+        self.setupUi(self)
+        self.connect(self.dateConstraintGroupBox, QtCore.SIGNAL('clicked(bool)'), self.date_constraint_changed)
 
 
 class NotImplementedException(Exception):

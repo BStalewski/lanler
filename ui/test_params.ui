@@ -71,19 +71,18 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QLineEdit" name="daysAgoLineEdit">
-            <property name="text">
-             <string>1</string>
+           <widget class="QSpinBox" name="daysAgoSpinBox">
+            <property name="enabled">
+             <bool>false</bool>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="daysAgoLabel">
-            <property name="text">
+            <property name="suffix">
              <string>dni temu</string>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>30</number>
             </property>
            </widget>
           </item>
@@ -202,6 +201,22 @@
     <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>yesDateConstraintRadioButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>daysAgoSpinBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>125</x>
+     <y>165</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>124</x>
+     <y>197</y>
     </hint>
    </hints>
   </connection>

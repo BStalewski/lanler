@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/test_params.ui'
 #
-# Created: Sat Jul 13 23:56:04 2013
+# Created: Sun Jul 14 00:25:45 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -57,13 +57,12 @@ class Ui_TestParamsDialog(object):
         self.verticalLayout_3.addWidget(self.yesDateConstraintRadioButton)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.daysAgoLineEdit = QtGui.QLineEdit(self.dateConstraintGroupBox)
-        self.daysAgoLineEdit.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.daysAgoLineEdit.setObjectName(_fromUtf8("daysAgoLineEdit"))
-        self.horizontalLayout.addWidget(self.daysAgoLineEdit)
-        self.daysAgoLabel = QtGui.QLabel(self.dateConstraintGroupBox)
-        self.daysAgoLabel.setObjectName(_fromUtf8("daysAgoLabel"))
-        self.horizontalLayout.addWidget(self.daysAgoLabel)
+        self.daysAgoSpinBox = QtGui.QSpinBox(self.dateConstraintGroupBox)
+        self.daysAgoSpinBox.setEnabled(False)
+        self.daysAgoSpinBox.setMinimum(1)
+        self.daysAgoSpinBox.setMaximum(30)
+        self.daysAgoSpinBox.setObjectName(_fromUtf8("daysAgoSpinBox"))
+        self.horizontalLayout.addWidget(self.daysAgoSpinBox)
         self.verticalLayout_3.addLayout(self.horizontalLayout)
         self.verticalLayout_2.addWidget(self.dateConstraintGroupBox)
         self.posChooseGroupBox = QtGui.QGroupBox(TestParamsDialog)
@@ -101,6 +100,7 @@ class Ui_TestParamsDialog(object):
         self.retranslateUi(TestParamsDialog)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), TestParamsDialog.accept)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), TestParamsDialog.reject)
+        QtCore.QObject.connect(self.yesDateConstraintRadioButton, QtCore.SIGNAL(_fromUtf8("toggled(bool)")), self.daysAgoSpinBox.setEnabled)
         QtCore.QMetaObject.connectSlotsByName(TestParamsDialog)
 
     def retranslateUi(self, TestParamsDialog):
@@ -111,8 +111,7 @@ class Ui_TestParamsDialog(object):
         self.dateConstraintGroupBox.setTitle(_translate("TestParamsDialog", "Data ostatniej modyfikacji:", None))
         self.noDateConstraintRadioButton.setText(_translate("TestParamsDialog", "Brak ograniczenia", None))
         self.yesDateConstraintRadioButton.setText(_translate("TestParamsDialog", "Niewcześniej niż", None))
-        self.daysAgoLineEdit.setText(_translate("TestParamsDialog", "1", None))
-        self.daysAgoLabel.setText(_translate("TestParamsDialog", "dni temu", None))
+        self.daysAgoSpinBox.setSuffix(_translate("TestParamsDialog", "dni temu", None))
         self.posChooseGroupBox.setTitle(_translate("TestParamsDialog", "Części mowy:", None))
         self.nounCheckBox.setText(_translate("TestParamsDialog", "Rzeczowniki", None))
         self.verbCheckBox.setText(_translate("TestParamsDialog", "Czasowniki", None))
