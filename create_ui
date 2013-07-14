@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SRC_DIR="ui"
-DST_DIR="py_ui"
+DST_DIR="gui/py_ui"
 
 for fpath in ${SRC_DIR}/*
 do

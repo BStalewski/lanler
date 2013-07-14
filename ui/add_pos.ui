@@ -60,7 +60,7 @@
   <customwidget>
    <class>PortugueseQLineEdit</class>
    <extends>QLineEdit</extends>
-   <header location="global">custom_widgets.portuguese_qlineedit</header>
+   <header location="global">..custom_widgets.portuguese_qlineedit</header>
   </customwidget>
  </customwidgets>
  <resources/>
