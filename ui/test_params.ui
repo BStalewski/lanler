@@ -165,13 +165,13 @@
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox">
+      <widget class="QGroupBox" name="testsCountGroupBox">
        <property name="title">
-        <string>Liczba słów:</string>
+        <string>Liczba testów:</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <widget class="QSpinBox" name="spinBox">
+         <widget class="QSpinBox" name="testsCountSpinBox">
           <property name="minimum">
            <number>1</number>
           </property>

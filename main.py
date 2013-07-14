@@ -356,9 +356,20 @@ class AddPoSDialog(QDialog, Ui_AddPoSDialog):
 
 
 class TestParamsDialog(QDialog, Ui_TestParamsDialog):
+    MIN_WORDS = 1
+    MAX_WORDS = 999999
+
     def __init__(self, parent):
         QDialog.__init__(self, parent)
         self.setupUi(self)
+        self.type_radios = [
+            self.plPtTypeRadioButton,
+            self.ptPlTypeRadioButton,
+        ]
+        self.date_constraint_radios = [
+            self.noDateConstraintRadioButton,
+            self.yesDateConstraintRadioButton,
+        ]
         self.pos_checkboxes = [
             self.nounCheckBox,
             self.verbCheckBox,
@@ -377,6 +388,13 @@ class TestParamsDialog(QDialog, Ui_TestParamsDialog):
 
     def uncheck_all(self):
         self.set_all_pos_checkboxes(False)
+
+    def validate(self):
+        typesRadioChecked = 0
+        raise NotImplementedException()
+
+    def get_fields(self):
+        raise NotImplementedException()
 
 
 class NotImplementedException(Exception):

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/test_params.ui'
 #
-# Created: Sun Jul 14 01:15:31 2013
+# Created: Sun Jul 14 10:10:21 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -95,16 +95,16 @@ class Ui_TestParamsDialog(object):
         self.horizontalLayout_2.addWidget(self.uncheckAllPosPushButton)
         self.verticalLayout_4.addLayout(self.horizontalLayout_2)
         self.verticalLayout_2.addWidget(self.posChooseGroupBox)
-        self.groupBox = QtGui.QGroupBox(TestParamsDialog)
-        self.groupBox.setObjectName(_fromUtf8("groupBox"))
-        self.verticalLayout_6 = QtGui.QVBoxLayout(self.groupBox)
+        self.testsCountGroupBox = QtGui.QGroupBox(TestParamsDialog)
+        self.testsCountGroupBox.setObjectName(_fromUtf8("testsCountGroupBox"))
+        self.verticalLayout_6 = QtGui.QVBoxLayout(self.testsCountGroupBox)
         self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
-        self.spinBox = QtGui.QSpinBox(self.groupBox)
-        self.spinBox.setMinimum(1)
-        self.spinBox.setMaximum(999999)
-        self.spinBox.setObjectName(_fromUtf8("spinBox"))
-        self.verticalLayout_6.addWidget(self.spinBox)
-        self.verticalLayout_2.addWidget(self.groupBox)
+        self.testsCountSpinBox = QtGui.QSpinBox(self.testsCountGroupBox)
+        self.testsCountSpinBox.setMinimum(1)
+        self.testsCountSpinBox.setMaximum(999999)
+        self.testsCountSpinBox.setObjectName(_fromUtf8("testsCountSpinBox"))
+        self.verticalLayout_6.addWidget(self.testsCountSpinBox)
+        self.verticalLayout_2.addWidget(self.testsCountGroupBox)
         self.verticalLayout.addLayout(self.verticalLayout_2)
         self.buttonBox = QtGui.QDialogButtonBox(TestParamsDialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
@@ -134,5 +134,5 @@ class Ui_TestParamsDialog(object):
         self.pronounCheckBox.setText(_translate("TestParamsDialog", "Zaimki", None))
         self.checkAllPosPushButton.setText(_translate("TestParamsDialog", "Zaznacz", None))
         self.uncheckAllPosPushButton.setText(_translate("TestParamsDialog", "Odznacz", None))
-        self.groupBox.setTitle(_translate("TestParamsDialog", "Liczba słów:", None))
+        self.testsCountGroupBox.setTitle(_translate("TestParamsDialog", "Liczba testów:", None))
 
