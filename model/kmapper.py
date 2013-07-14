@@ -4,6 +4,7 @@
 
 dead_keys = {u'~', u'^', u'´', u'`', u'¨', }
 
+
 def map_pl_to_br(msg):
     next_to_last_index = len(msg) - 2
     msg_br_layout = LayoutMapper().change_layout(msg, [next_to_last_index])
@@ -126,7 +127,6 @@ class DeadKeyEater:
 
         return key
 
-    
+
 class KMapperException(Exception):
     pass
-

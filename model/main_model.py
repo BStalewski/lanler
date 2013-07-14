@@ -54,14 +54,14 @@ def throw_on_empty(*check_args):
                     arg_spec = inspect.get_argspec(fun)
                     passed_args_count = len(args) + len(kwargs)
                     value = arg_spec.defaults[index - passed_args_count + 1]
-                
+
                 if not value:
                     raise ModelException(u'%s empty' % arg_name)
 
             return fun(*args, **kwargs)
 
         return wrapper
-    
+
     return ext_wrapper
 
 
@@ -214,4 +214,3 @@ class PlPtDictionaryModel(DictionaryModel):
 
 class ModelException(Exception):
     pass
-

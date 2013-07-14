@@ -56,7 +56,7 @@ class PlPtDictionaryFrame(PtPlDictionaryFrame):
 
         tablemodel = PlPtDictionaryModel(self.model.get_current_user(), self)
         self.dictionaryTableView.setModel(tablemodel)
-    
+
     def retranslateUi(self, frame):
         Ui_PtPlDictionaryFrame.retranslateUi(self, frame)
         frame.setWindowTitle(_translate("PlPtDictionaryFrame", "Frame", None))

@@ -54,7 +54,7 @@ class DB:
     def add_noun(self, username, polish, portuguese, gender):
         user = self.get_user(username)
         self.words.add_noun(user['_id'], polish, portuguese, gender)
-        
+
     def add_verb(self, username, polish, portuguese):
         user = self.get_user(username)
         self.words.add_pos(user['_id'], polish, portuguese, VERB)
@@ -142,7 +142,7 @@ class WordsCollection:
             self.USER: user_id,
             self.POLISH: polish,
             self.PORTUGUESE: portuguese,
-            self.GENDER: gender, 
+            self.GENDER: gender,
             self.POS: NOUN,
         }
 
@@ -157,7 +157,7 @@ class WordsCollection:
         }
 
         self.words.insert(new_pos)
-        
+
     def add_verb(self, user_id, polish, portuguese):
         self.add_pos(user_id, polish, portuguese, VERB)
 
@@ -177,4 +177,3 @@ class WordsCollection:
 
 class DBException(Exception):
     pass
-

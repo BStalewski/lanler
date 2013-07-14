@@ -1,0 +1,2 @@
+pep8 . --ignore=E501 --exclude=gui
+pep8 gui --ignore=E501 --exclude=py_ui

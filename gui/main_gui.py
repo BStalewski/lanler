@@ -3,7 +3,7 @@
 
 from PyQt4 import QtGui, QtCore
 from PyQt4.QtGui import (QAction, QApplication, QCheckBox, QDialog,
-QMainWindow, QMessageBox, QRadioButton, )
+                         QMainWindow, QMessageBox, QRadioButton, )
 
 from commons import CLICKED_SIGNAL, NotImplementedException
 from model.main_model import Model

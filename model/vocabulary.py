@@ -4,6 +4,7 @@
 import datetime
 import pytz
 
+
 class Vocabulary:
     def __init__(self, data=None):
         self.data = data or {}
@@ -27,6 +28,7 @@ class Word:
     def set_current_time():
         self.date = datetime.datetime.utcnow().replace(tzninfo=pytz.utc)
 
+
 class Translation:
     def __init__(self, trans_word, pos):
         self.trans_word = trans_word
@@ -35,4 +37,3 @@ class Translation:
 
     def __eq__(self, translation):
         return self.trans_word == translation.trans_word and self.pos == translation.pos
-
