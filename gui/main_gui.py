@@ -3,26 +3,17 @@
 
 from PyQt4 import QtGui, QtCore
 from PyQt4.QtGui import (QAction, QApplication, QCheckBox, QDialog,
-QFrame, QMainWindow, QMessageBox, QRadioButton,)
+QMainWindow, QMessageBox, QRadioButton, )
 
-from commons import CLICKED_SIGNAL
+from commons import CLICKED_SIGNAL, NotImplementedException, RightFrame
 from model.main_model import Model, PtPlDictionaryModel, PlPtDictionaryModel
+from .dictionary_frame import ChooseDictionaryFrame
+from .options_frame import OptionsFrame
+from .pos_frame import AddPoSFrame
 
 from py_ui.main_ui import Ui_MainWindow
 from py_ui.choose_user_ui import Ui_ChooseUserDialog
 from py_ui.new_user_ui import Ui_NewUserDialog
-
-from py_ui.choose_add_pos_ui import Ui_AddPoSFrame
-from py_ui.add_noun_ui import Ui_AddNounDialog
-from py_ui.add_pos_ui import Ui_AddPoSDialog
-
-from py_ui.choose_dictionary_ui import Ui_ChooseDictionaryFrame
-from py_ui.pt_pl_dictionary_ui import Ui_PtPlDictionaryFrame
-from py_ui.options_ui import Ui_OptionsFrame
-
-from py_ui.test_params_ui import Ui_TestParamsFrame
-
-from py_ui.pt_pl_dictionary_ui import _translate
 
 
 class Gui(QMainWindow, Ui_MainWindow):
@@ -110,11 +101,6 @@ class Gui(QMainWindow, Ui_MainWindow):
         self.userName.showMessage(msg)
 
 
-class RightFrame():
-    def __init__(self, main_window):
-        self.main_window = main_window
-
-
 class ChooseUserDialog(QDialog, Ui_ChooseUserDialog):
     def __init__(self, model, parent=None):
         QDialog.__init__(self, parent)
@@ -175,229 +161,3 @@ class NewUserDialog(QDialog, Ui_NewUserDialog):
             QDialog.accept(self)
         else:
             QMessageBox.warning(self, u'Błąd', u'Błąd: nazwa użytkownika musi być unikalna')
-
-
-class AddPoSFrame(QFrame, Ui_AddPoSFrame, RightFrame):
-    def __init__(self, model, parent):
-        QFrame.__init__(self, parent)
-        RightFrame.__init__(self, parent)
-        self.setupUi(self)
-        self.connect(self.addNounButton, CLICKED_SIGNAL, self.add_noun)
-        self.connect(self.addVerbButton, CLICKED_SIGNAL, self.add_verb)
-        self.connect(self.addAdjectiveButton, CLICKED_SIGNAL, self.add_adjective)
-        self.connect(self.addPronounButton, CLICKED_SIGNAL, self.add_pronoun)
-        self.model = model
-
-    def add_noun(self):
-        dialog = AddNounDialog(self)
-        if dialog.exec_():
-            self.model.add_noun(**dialog.get_fields())
-
-    def add_verb(self):
-        dialog = AddPoSDialog(self)
-        if dialog.exec_():
-            self.model.add_verb(**dialog.get_fields())
-
-    def add_adjective(self):
-        dialog = AddPoSDialog(self)
-        if dialog.exec_():
-            self.model.add_adjective(**dialog.get_fields())
-
-    def add_pronoun(self):
-        dialog = AddPoSDialog(self)
-        if dialog.exec_():
-            self.model.add_pronoun(**dialog.get_fields())
-
-
-class OptionsFrame(QFrame, Ui_OptionsFrame, RightFrame):
-    def __init__(self, parent):
-        QFrame.__init__(self, parent)
-        RightFrame.__init__(self, parent)
-        self.setupUi(self)
-        self.connect(self.changeUserButton, CLICKED_SIGNAL, self.change_user)
-        self.connect(self.removeUserButton, CLICKED_SIGNAL, self.remove_user)
-
-    def change_user(self):
-        print 'change user'
-        raise NotImplementedException('change user')
-
-    def remove_user(self):
-        print 'remove user'
-        raise NotImplementedException('remove user')
-
-
-class ChooseDictionaryFrame(QFrame, Ui_ChooseDictionaryFrame, RightFrame):
-    def __init__(self, model, parent):
-        QFrame.__init__(self, parent)
-        RightFrame.__init__(self, parent)
-        self.setupUi(self)
-        self.connect(self.plPtDictionaryButton, CLICKED_SIGNAL, self.pl_pt_dictionary)
-        self.connect(self.ptPlDictionaryButton, CLICKED_SIGNAL, self.pt_pl_dictionary)
-        self.model = model
-
-    def pl_pt_dictionary(self):
-        self.main_window.show_frame(PlPtDictionaryFrame(self.model, self.parent()))
-
-    def pt_pl_dictionary(self):
-        self.main_window.show_frame(PtPlDictionaryFrame(self.model, self.parent()))
-
-
-class PtPlDictionaryFrame(QFrame, Ui_PtPlDictionaryFrame, RightFrame):
-    def __init__(self, model, parent):
-        QFrame.__init__(self, parent)
-        RightFrame.__init__(self, parent)
-        self.setupUi(self)
-        self.connect(self.backButton, CLICKED_SIGNAL, self.back)
-
-        self.model = model
-
-        tablemodel = PtPlDictionaryModel(self.model.get_current_user(), self)
-        self.dictionaryTableView.setModel(tablemodel)
-
-    def resize(self, *args):
-        try:
-            self.dictionaryTableView.setVisible(False)
-            self.dictionaryTableView.resizeColumnsToContents()
-            self.dictionaryTableView.setVisible(True)
-        except AttributeError:
-            pass
-        QFrame.resize(self, *args)
-
-    def back(self):
-        raise NotImplementedException('back')
-
-
-class PlPtDictionaryFrame(PtPlDictionaryFrame):
-    def __init__(self, model, parent):
-        PtPlDictionaryFrame.__init__(self, model, parent)
-
-        tablemodel = PlPtDictionaryModel(self.model.get_current_user(), self)
-        self.dictionaryTableView.setModel(tablemodel)
-    
-    def retranslateUi(self, frame):
-        Ui_PtPlDictionaryFrame.retranslateUi(self, frame)
-        frame.setWindowTitle(_translate("PlPtDictionaryFrame", "Frame", None))
-        self.label.setText(_translate("PlPtDictionaryFrame", "Słownik polsko - portugalski", None))
-
-    def back(self):
-        raise NotImplementedException('back')
-
-
-class AddNounDialog(QDialog, Ui_AddNounDialog):
-    def __init__(self, parent):
-        QDialog.__init__(self, parent)
-        self.setupUi(self)
-
-    def accept(self):
-        if self.validate():
-            QDialog.accept(self)
-
-    def get_gender(self):
-        return 'M' if self.masculineRadioButton.isChecked() else 'F'
-
-    def get_polish(self):
-        return self.polishLineEdit.text().trimmed()
-
-    def get_portuguese(self):
-        return self.portugueseLineEdit.text().trimmed()
-
-    def validate(self):
-        polish = self.get_polish()
-        portuguese = self.get_portuguese()
-        gender = self.get_gender()
-        if not polish or not portuguese:
-            QMessageBox.warning(self, u'Błąd', u'Błąd: wszystkie pola muszą być uzupełnione')
-            return False
-
-        if not gender:
-            QMessageBox.warning(self, u'Błąd', u'Błąd: niewybrany rodzaj rzeczownika')
-            return False
-
-        return True
-
-    def get_fields(self):
-        return {
-            u'polish': self.get_polish(),
-            u'portuguese': self.get_portuguese(),
-            u'gender': self.get_gender(),
-        }
-
-
-class AddPoSDialog(QDialog, Ui_AddPoSDialog):
-    def __init__(self, parent):
-        QDialog.__init__(self, parent)
-        self.setupUi(self)
-
-    def accept(self):
-        if self.validate():
-            QDialog.accept(self)
-
-    def get_polish(self):
-        return self.polishLineEdit.text().trimmed()
-
-    def get_portuguese(self):
-        return self.portugueseLineEdit.text().trimmed()
-
-    def validate(self):
-        polish = self.get_polish()
-        portuguese = self.get_portuguese()
-        if not polish or not portuguese:
-            QMessageBox.warning(self, u'Błąd', u'Błąd: wszystkie pola muszą być uzupełnione')
-            return False
-
-        return True
-
-    def get_fields(self):
-        return {
-            u'polish': self.get_polish(),
-            u'portuguese': self.get_portuguese(),
-        }
-
-
-class TestParamsFrame(QFrame, Ui_TestParamsFrame):
-    MIN_TESTS = 1
-    MAX_TESTS = 999999
-
-    def __init__(self, parent):
-        QFrame.__init__(self, parent)
-        self.setupUi(self)
-        self.type_radios = [
-            self.plPtTypeRadioButton,
-            self.ptPlTypeRadioButton,
-        ]
-        self.date_constraint_radios = [
-            self.noDateConstraintRadioButton,
-            self.yesDateConstraintRadioButton,
-        ]
-        self.pos_checkboxes = [
-            self.nounCheckBox,
-            self.verbCheckBox,
-            self.adjectiveCheckBox,
-            self.pronounCheckBox,
-        ]
-        self.connect(self.checkAllPosPushButton, CLICKED_SIGNAL, self.check_all)
-        self.connect(self.uncheckAllPosPushButton, CLICKED_SIGNAL, self.uncheck_all)
-
-    def set_all_pos_checkboxes(self, checked):
-        for checkbox in self.pos_checkboxes:
-            checkbox.setChecked(checked)
-
-    def check_all(self):
-        self.set_all_pos_checkboxes(True)
-
-    def uncheck_all(self):
-        self.set_all_pos_checkboxes(False)
-
-    def validate(self):
-        types_radio_checked = 0
-        types_checked = sum(btn.isChecked() for btn in self.type_radios)
-        dates_checked = sum(btn.isChecked() for btn in self.date_constraint_radios)
-        pos_checked = sum(btn.isChecked() for btn in self.pos_checkboxes)
-        raise NotImplementedException()
-
-    def get_fields(self):
-        raise NotImplementedException()
-
-
-class NotImplementedException(Exception):
-    pass
