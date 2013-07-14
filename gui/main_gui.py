@@ -18,7 +18,6 @@ from py_ui.new_user_ui import Ui_NewUserDialog
 
 
 class Gui(QMainWindow, Ui_MainWindow):
-
     def __init__(self, model):
         QMainWindow.__init__(self, None)
         self.setupUi(self)

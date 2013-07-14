@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/test_params.ui'
 #
-# Created: Sun Jul 14 18:57:25 2013
+# Created: Sun Jul 14 22:00:54 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -36,6 +36,7 @@ class Ui_TestParamsFrame(object):
         self.verticalLayout = QtGui.QVBoxLayout(self.typeGroupBox)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.plPtTypeRadioButton = QtGui.QRadioButton(self.typeGroupBox)
+        self.plPtTypeRadioButton.setChecked(True)
         self.plPtTypeRadioButton.setObjectName(_fromUtf8("plPtTypeRadioButton"))
         self.verticalLayout.addWidget(self.plPtTypeRadioButton)
         self.ptPlTypeRadioButton = QtGui.QRadioButton(self.typeGroupBox)
@@ -47,6 +48,7 @@ class Ui_TestParamsFrame(object):
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.dateConstraintGroupBox)
         self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
         self.noDateConstraintRadioButton = QtGui.QRadioButton(self.dateConstraintGroupBox)
+        self.noDateConstraintRadioButton.setChecked(True)
         self.noDateConstraintRadioButton.setObjectName(_fromUtf8("noDateConstraintRadioButton"))
         self.verticalLayout_3.addWidget(self.noDateConstraintRadioButton)
         self.yesDateConstraintRadioButton = QtGui.QRadioButton(self.dateConstraintGroupBox)
@@ -103,7 +105,7 @@ class Ui_TestParamsFrame(object):
 
     def retranslateUi(self, TestParamsFrame):
         TestParamsFrame.setWindowTitle(_translate("TestParamsFrame", "Frame", None))
-        self.typeGroupBox.setTitle(_translate("TestParamsFrame", "GroupBox", None))
+        self.typeGroupBox.setTitle(_translate("TestParamsFrame", "Typ testu:", None))
         self.plPtTypeRadioButton.setText(_translate("TestParamsFrame", "polski -> portugalski", None))
         self.ptPlTypeRadioButton.setText(_translate("TestParamsFrame", "portugalski -> polski", None))
         self.dateConstraintGroupBox.setTitle(_translate("TestParamsFrame", "Data ostatniej modyfikacji:", None))

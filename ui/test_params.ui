@@ -23,13 +23,16 @@
    <item>
     <widget class="QGroupBox" name="typeGroupBox">
      <property name="title">
-      <string>GroupBox</string>
+      <string>Typ testu:</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QRadioButton" name="plPtTypeRadioButton">
         <property name="text">
          <string>polski -&gt; portugalski</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -53,6 +56,9 @@
        <widget class="QRadioButton" name="noDateConstraintRadioButton">
         <property name="text">
          <string>Brak ograniczenia</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
