@@ -1,10 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from PyQt4.QtCore import QString
 from PyQt4.QtGui import QFrame, QMessageBox
 
 from commons import CLICKED_SIGNAL, NotImplementedException, RightFrame
 from py_ui.test_params_ui import Ui_TestParamsFrame
+from py_ui.test_translate_ui import Ui_TestTranslateFrame
+from gui.custom_widgets.portuguese_qlineedit import make_portuguese_line_edit
+
 
 PL_PT_TEST = u'PLPT'
 PT_PL_TEST = u'PTPL'
@@ -15,18 +19,20 @@ ADJECTIVE = u'adjective'
 PRONOUN = u'pronoun'
 
 
-class TestParamsFrame(QFrame, Ui_TestParamsFrame):
+class TestParamsFrame(QFrame, Ui_TestParamsFrame, RightFrame):
     MIN_TESTS = 1
     MAX_TESTS = 999999
 
-    def __init__(self, parent):
+    def __init__(self, model, parent):
         QFrame.__init__(self, parent)
+        RightFrame.__init__(self, parent)
         self.setupUi(self)
         self.testsCountSpinBox.setRange(self.MIN_TESTS, self.MAX_TESTS)
         self.connect(self.checkAllPosPushButton, CLICKED_SIGNAL, self.check_all)
         self.connect(self.uncheckAllPosPushButton, CLICKED_SIGNAL, self.uncheck_all)
         self.connect(self.startPushButton, CLICKED_SIGNAL, self.start_test)
 
+        self.model = model
         self.type_radios = [
             self.plPtTypeRadioButton,
             self.ptPlTypeRadioButton,
@@ -88,7 +94,7 @@ class TestParamsFrame(QFrame, Ui_TestParamsFrame):
 
     def get_fields(self):
         return {
-            u'type': self.get_test_type(),
+            u'test_type': self.get_test_type(),
             u'days': self.get_days_constraint(),
             u'pos': self.get_checked_pos(),
             u'count': self.testsCountSpinBox.value(),
@@ -96,5 +102,28 @@ class TestParamsFrame(QFrame, Ui_TestParamsFrame):
 
     def start_test(self):
         if self.validate():
-            raise NotImplementedException()
-            #self.main_window.show_frame(PlPtDictionaryFrame(self.model, self.parent()))
+            fields = self.get_fields()
+            self.model.generate_test_words(**fields)
+            word = self.model.get_next_test_word()
+            new_frame = TestTranslateFrame(word, 1, fields[u'count'], self.parent())
+            self.main_window.show_frame(new_frame)
+
+
+class TestTranslateFrame(QFrame, Ui_TestTranslateFrame):
+    def __init__(self, word, current_count, total_count, parent):
+        QFrame.__init__(self, parent)
+        self.setupUi(self)
+        self.wordLabel.setText(word)
+        self.current_count = current_count
+        self.total_count = total_count
+        self.progressBar.setValue(self.current_count)
+        self.progressBar.setMaximum(self.total_count)
+
+        self.connect(self.nextPushButton, CLICKED_SIGNAL, self.next_word)
+        self.connect(self.endPushButton, CLICKED_SIGNAL, self.end_test)
+
+    def next_word(self):
+        raise NotImplementedException()
+
+    def end_test(self):
+        raise NotImplementedException()

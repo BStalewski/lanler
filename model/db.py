@@ -71,6 +71,11 @@ class DB:
         user = self.get_user(username)
         return self.words.get_words(user['_id'], sort_key)
 
+    def generate_test_words(self, username, test_type, days, pos, count):
+        user = self.get_user(username)
+        for x in range(count):
+            yield 'aaa'
+
     @classmethod
     def get_instance(cls, clean=False):
         if not cls.instance:

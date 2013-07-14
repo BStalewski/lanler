@@ -130,6 +130,17 @@ class Model:
         self.db.add_pronoun(self.current_user_name, polish, portuguese)
 
 
+    @to_model_format
+    @assert_user
+    @throw_on_empty('test_type', 'pos', 'count')
+    def generate_test_words(self, test_type, days, pos, count):
+        self.test_words = self.db.generate_test_words(self.current_user_name, test_type, days, pos, count)
+
+    @assert_user
+    def get_next_test_word(self):
+        return next(self.test_words)
+
+
 class DictionaryModel(QAbstractTableModel):
     POLISH_KEY = u'polish'
     PORTUGUESE_KEY = u'portuguese'

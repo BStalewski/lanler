@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>308</width>
-    <height>383</height>
+    <width>149</width>
+    <height>231</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,16 +21,12 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="translateLabel">
-     <property name="text">
-      <string>Przetłumacz:</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QLabel" name="wordLabel">
      <property name="text">
-      <string>TextLabel</string>
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
@@ -42,7 +38,21 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="translationLineEdit"/>
+    <widget class="QLabel" name="translateLabel">
+     <property name="text">
+      <string>Tłumaczenie:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="translationLineEdit">
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="Line" name="line">
@@ -59,7 +69,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="endPushButton">
      <property name="text">
       <string>Zakończ</string>
      </property>
@@ -70,6 +80,9 @@
      <property name="text">
       <string>Postęp:</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </item>
    <item>
@@ -78,7 +91,7 @@
       <number>24</number>
      </property>
      <property name="format">
-      <string>%p/maks</string>
+      <string>%v/%m</string>
      </property>
     </widget>
    </item>

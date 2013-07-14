@@ -82,7 +82,7 @@ class Gui(QMainWindow, Ui_MainWindow):
 
     @change_right_frame
     def test(self):
-        return TestParamsFrame(self)
+        return TestParamsFrame(self.model, self)
 
     @change_right_frame
     def dictionary(self):
