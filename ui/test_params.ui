@@ -1,251 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TestParamsDialog</class>
- <widget class="QDialog" name="TestParamsDialog">
+ <class>TestParamsFrame</class>
+ <widget class="QFrame" name="TestParamsFrame">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>224</width>
-    <height>518</height>
+    <height>516</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Parametry testu</string>
+   <string>Frame</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <property name="frameShape">
+   <enum>QFrame::StyledPanel</enum>
+  </property>
+  <property name="frameShadow">
+   <enum>QFrame::Raised</enum>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QGroupBox" name="typeGroupBox">
-       <property name="title">
-        <string>Typ testu:</string>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
-        <item>
-         <widget class="QRadioButton" name="plPtTypeRadioButton">
-          <property name="text">
-           <string>polski -&gt; portugalski</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="ptPlTypeRadioButton">
-          <property name="text">
-           <string>portugalski -&gt; polski</string>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </item>
-     <item>
-      <widget class="QGroupBox" name="dateConstraintGroupBox">
-       <property name="title">
-        <string>Data ostatniej modyfikacji:</string>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <widget class="QRadioButton" name="noDateConstraintRadioButton">
-          <property name="text">
-           <string>Brak ograniczenia</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="yesDateConstraintRadioButton">
-          <property name="text">
-           <string>Niewcześniej niż</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QSpinBox" name="daysAgoSpinBox">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="suffix">
-             <string> dni temu</string>
-            </property>
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>30</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-     </item>
-     <item>
-      <widget class="QGroupBox" name="posChooseGroupBox">
-       <property name="title">
-        <string>Części mowy:</string>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QCheckBox" name="nounCheckBox">
-          <property name="text">
-           <string>Rzeczowniki</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="verbCheckBox">
-          <property name="text">
-           <string>Czasowniki</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="adjectiveCheckBox">
-          <property name="text">
-           <string>Przymiotniki</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="pronounCheckBox">
-          <property name="text">
-           <string>Zaimki</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QPushButton" name="checkAllPosPushButton">
-            <property name="text">
-             <string>Zaznacz</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="uncheckAllPosPushButton">
-            <property name="text">
-             <string>Odznacz</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-       <zorder>dateConstraintGroupBox</zorder>
-       <zorder>adjectiveCheckBox</zorder>
-       <zorder>pronounCheckBox</zorder>
-       <zorder>verbCheckBox</zorder>
-       <zorder>nounCheckBox</zorder>
-       <zorder>horizontalLayoutWidget_2</zorder>
-      </widget>
-     </item>
-     <item>
-      <widget class="QGroupBox" name="testsCountGroupBox">
-       <property name="title">
-        <string>Liczba testów:</string>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
-        <item>
-         <widget class="QSpinBox" name="testsCountSpinBox">
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <number>999999</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QGroupBox" name="typeGroupBox">
+     <property name="title">
+      <string>GroupBox</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QRadioButton" name="plPtTypeRadioButton">
+        <property name="text">
+         <string>polski -&gt; portugalski</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="ptPlTypeRadioButton">
+        <property name="text">
+         <string>portugalski -&gt; polski</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+    <widget class="QGroupBox" name="dateConstraintGroupBox">
+     <property name="title">
+      <string>Data ostatniej modyfikacji:</string>
      </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QRadioButton" name="noDateConstraintRadioButton">
+        <property name="text">
+         <string>Brak ograniczenia</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="yesDateConstraintRadioButton">
+        <property name="text">
+         <string>Niewcześniej niż</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="daysAgoSpinBox">
+        <property name="suffix">
+         <string> dni temu</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>30</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="posChooseGroupBox">
+     <property name="title">
+      <string>Części mowy:</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QCheckBox" name="nounCheckBox">
+        <property name="text">
+         <string>Rzeczowniki</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="verbCheckBox">
+        <property name="text">
+         <string>Czasowniki</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="adjectiveCheckBox">
+        <property name="text">
+         <string>Przymiotniki</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="pronounCheckBox">
+        <property name="text">
+         <string>Zaimki</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="checkAllPosPushButton">
+          <property name="text">
+           <string>Zaznacz</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="uncheckAllPosPushButton">
+          <property name="text">
+           <string>Odznacz</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="testsCountGroupBox">
+     <property name="title">
+      <string>Liczba testów:</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <widget class="QSpinBox" name="testsCountSpinBox">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999999</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="startPushButton">
+     <property name="text">
+      <string>Rozpocznij</string>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>TestParamsDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>TestParamsDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>yesDateConstraintRadioButton</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>daysAgoSpinBox</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>125</x>
-     <y>165</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>124</x>
-     <y>197</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

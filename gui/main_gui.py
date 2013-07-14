@@ -5,6 +5,7 @@ from PyQt4 import QtGui, QtCore
 from PyQt4.QtGui import (QAction, QApplication, QCheckBox, QDialog,
 QFrame, QMainWindow, QMessageBox, QRadioButton,)
 
+from commons import CLICKED_SIGNAL
 from model.main_model import Model, PtPlDictionaryModel, PlPtDictionaryModel
 
 from py_ui.main_ui import Ui_MainWindow
@@ -19,7 +20,7 @@ from py_ui.choose_dictionary_ui import Ui_ChooseDictionaryFrame
 from py_ui.pt_pl_dictionary_ui import Ui_PtPlDictionaryFrame
 from py_ui.options_ui import Ui_OptionsFrame
 
-from py_ui.test_params_ui import Ui_TestParamsDialog
+from py_ui.test_params_ui import Ui_TestParamsFrame
 
 from py_ui.pt_pl_dictionary_ui import _translate
 
@@ -30,10 +31,10 @@ class Gui(QMainWindow, Ui_MainWindow):
         QMainWindow.__init__(self, None)
         self.setupUi(self)
 
-        self.connect(self.addPoSButton, QtCore.SIGNAL('clicked()'), self.add_pos)
-        self.connect(self.testButton, QtCore.SIGNAL('clicked()'), self.test)
-        self.connect(self.dictionaryButton, QtCore.SIGNAL('clicked()'), self.dictionary)
-        self.connect(self.optionsButton, QtCore.SIGNAL('clicked()'), self.options)
+        self.connect(self.addPoSButton, CLICKED_SIGNAL, self.add_pos)
+        self.connect(self.testButton, CLICKED_SIGNAL, self.test)
+        self.connect(self.dictionaryButton, CLICKED_SIGNAL, self.dictionary)
+        self.connect(self.optionsButton, CLICKED_SIGNAL, self.options)
 
         self.model = model
 
@@ -90,7 +91,7 @@ class Gui(QMainWindow, Ui_MainWindow):
 
     @change_right_frame
     def test(self):
-        return TestParamsDialog(self)
+        return TestParamsFrame(self)
 
     @change_right_frame
     def dictionary(self):
@@ -119,7 +120,7 @@ class ChooseUserDialog(QDialog, Ui_ChooseUserDialog):
         QDialog.__init__(self, parent)
         self.setupUi(self)
         self.radio_buttons = []
-        self.connect(self.newUserButton, QtCore.SIGNAL('clicked()'), self.create_new_user)
+        self.connect(self.newUserButton, CLICKED_SIGNAL, self.create_new_user)
         self.model = model
         names = self.model.get_users_names()
         self.user_names = names
@@ -181,10 +182,10 @@ class AddPoSFrame(QFrame, Ui_AddPoSFrame, RightFrame):
         QFrame.__init__(self, parent)
         RightFrame.__init__(self, parent)
         self.setupUi(self)
-        self.connect(self.addNounButton, QtCore.SIGNAL('clicked()'), self.add_noun)
-        self.connect(self.addVerbButton, QtCore.SIGNAL('clicked()'), self.add_verb)
-        self.connect(self.addAdjectiveButton, QtCore.SIGNAL('clicked()'), self.add_adjective)
-        self.connect(self.addPronounButton, QtCore.SIGNAL('clicked()'), self.add_pronoun)
+        self.connect(self.addNounButton, CLICKED_SIGNAL, self.add_noun)
+        self.connect(self.addVerbButton, CLICKED_SIGNAL, self.add_verb)
+        self.connect(self.addAdjectiveButton, CLICKED_SIGNAL, self.add_adjective)
+        self.connect(self.addPronounButton, CLICKED_SIGNAL, self.add_pronoun)
         self.model = model
 
     def add_noun(self):
@@ -213,8 +214,8 @@ class OptionsFrame(QFrame, Ui_OptionsFrame, RightFrame):
         QFrame.__init__(self, parent)
         RightFrame.__init__(self, parent)
         self.setupUi(self)
-        self.connect(self.changeUserButton, QtCore.SIGNAL('clicked()'), self.change_user)
-        self.connect(self.removeUserButton, QtCore.SIGNAL('clicked()'), self.remove_user)
+        self.connect(self.changeUserButton, CLICKED_SIGNAL, self.change_user)
+        self.connect(self.removeUserButton, CLICKED_SIGNAL, self.remove_user)
 
     def change_user(self):
         print 'change user'
@@ -230,8 +231,8 @@ class ChooseDictionaryFrame(QFrame, Ui_ChooseDictionaryFrame, RightFrame):
         QFrame.__init__(self, parent)
         RightFrame.__init__(self, parent)
         self.setupUi(self)
-        self.connect(self.plPtDictionaryButton, QtCore.SIGNAL('clicked()'), self.pl_pt_dictionary)
-        self.connect(self.ptPlDictionaryButton, QtCore.SIGNAL('clicked()'), self.pt_pl_dictionary)
+        self.connect(self.plPtDictionaryButton, CLICKED_SIGNAL, self.pl_pt_dictionary)
+        self.connect(self.ptPlDictionaryButton, CLICKED_SIGNAL, self.pt_pl_dictionary)
         self.model = model
 
     def pl_pt_dictionary(self):
@@ -246,7 +247,7 @@ class PtPlDictionaryFrame(QFrame, Ui_PtPlDictionaryFrame, RightFrame):
         QFrame.__init__(self, parent)
         RightFrame.__init__(self, parent)
         self.setupUi(self)
-        self.connect(self.backButton, QtCore.SIGNAL('clicked()'), self.back)
+        self.connect(self.backButton, CLICKED_SIGNAL, self.back)
 
         self.model = model
 
@@ -353,12 +354,12 @@ class AddPoSDialog(QDialog, Ui_AddPoSDialog):
         }
 
 
-class TestParamsDialog(QDialog, Ui_TestParamsDialog):
+class TestParamsFrame(QFrame, Ui_TestParamsFrame):
     MIN_TESTS = 1
     MAX_TESTS = 999999
 
     def __init__(self, parent):
-        QDialog.__init__(self, parent)
+        QFrame.__init__(self, parent)
         self.setupUi(self)
         self.type_radios = [
             self.plPtTypeRadioButton,
@@ -374,8 +375,8 @@ class TestParamsDialog(QDialog, Ui_TestParamsDialog):
             self.adjectiveCheckBox,
             self.pronounCheckBox,
         ]
-        self.connect(self.checkAllPosPushButton, QtCore.SIGNAL('clicked()'), self.check_all)
-        self.connect(self.uncheckAllPosPushButton, QtCore.SIGNAL('clicked()'), self.uncheck_all)
+        self.connect(self.checkAllPosPushButton, CLICKED_SIGNAL, self.check_all)
+        self.connect(self.uncheckAllPosPushButton, CLICKED_SIGNAL, self.uncheck_all)
 
     def set_all_pos_checkboxes(self, checked):
         for checkbox in self.pos_checkboxes:
