@@ -62,4 +62,4 @@ class Ui_AddPoSDialog(object):
         self.polishLabel.setText(_translate("AddPoSDialog", "polski", None))
         self.portugueseLabel.setText(_translate("AddPoSDialog", "portugalski", None))
 
-from custom_widgets.portuguese_qlineedit import PortugueseQLineEdit
+from ..custom_widgets.portuguese_qlineedit import PortugueseQLineEdit

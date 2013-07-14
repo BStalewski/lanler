@@ -1,6 +1,6 @@
 from PyQt4 import QtCore, QtGui
 
-from model import pl_to_br_layout
+from model.main_model import pl_to_br_layout
 
 class PortugueseQLineEdit(QtGui.QLineEdit):
     def __init__(self, parent):

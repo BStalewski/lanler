@@ -77,4 +77,4 @@ class Ui_AddNounDialog(object):
         self.masculineRadioButton.setText(_translate("AddNounDialog", "męski", None))
         self.FeminineRadioButton.setText(_translate("AddNounDialog", "żeński", None))
 
-from custom_widgets.portuguese_qlineedit import PortugueseQLineEdit
+from ..custom_widgets.portuguese_qlineedit import PortugueseQLineEdit
