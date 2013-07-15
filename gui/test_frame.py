@@ -5,18 +5,10 @@ from PyQt4.QtCore import QString
 from PyQt4.QtGui import QFrame, QMessageBox
 
 from commons import CLICKED_SIGNAL, NotImplementedException, RightFrame
+from consts import *
 from py_ui.test_params_ui import Ui_TestParamsFrame
 from py_ui.test_translate_ui import Ui_TestTranslateFrame
 from gui.custom_widgets.portuguese_qlineedit import make_portuguese_line_edit
-
-
-PL_PT_TEST = u'PLPT'
-PT_PL_TEST = u'PTPL'
-
-NOUN = u'noun'
-VERB = u'verb'
-ADJECTIVE = u'adjective'
-PRONOUN = u'pronoun'
 
 
 class TestParamsFrame(QFrame, Ui_TestParamsFrame, RightFrame):

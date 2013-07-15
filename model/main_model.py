@@ -1,12 +1,22 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from db import DB
-from db import NOUN, VERB, ADJECTIVE, PRONOUN
+import consts
+import gui.consts as gui_consts
 
+from db import DB
 from kmapper import map_pl_to_br
 
 from PyQt4.QtCore import Qt, QAbstractTableModel, QString, QVariant
+
+
+ALL_POS = ['NOUN', 'VERB', 'ADJECTIVE', 'PRONOUN', ]
+
+def get_pos_mapping(mod_from, mod_to):
+    return {mod_from.__dict__[pos]: mod_to.__dict__[pos] for pos in ALL_POS}
+
+pos_gui_model_dict = get_pos_mapping(gui_consts, consts)
+pos_model_gui_dict = get_pos_mapping(consts, gui_consts)
 
 
 def assert_user(fun):
@@ -134,11 +144,13 @@ class Model:
     @assert_user
     @throw_on_empty('test_type', 'pos', 'count')
     def generate_test_words(self, test_type, days, pos, count):
-        self.test_words = self.db.generate_test_words(self.current_user_name, test_type, days, pos, count)
+        self.test_words = self.db.generate_test_words(self.current_user_name, days, pos, count)
+        self.test_type = test_type
 
     @assert_user
     def get_next_test_word(self):
-        return next(self.test_words)
+        key = 'polish' if self.test_type == gui_consts.PL_PT_TEST else 'portuguese'
+        return next(self.test_words)[key]
 
 
 class DictionaryModel(QAbstractTableModel):

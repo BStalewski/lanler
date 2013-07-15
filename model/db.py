@@ -1,15 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from user import User
-
+import random
 from pymongo import MongoClient
 
-
-NOUN = 0
-VERB = 1
-ADJECTIVE = 2
-PRONOUN = 3
+from consts import *
+from user import User
 
 
 class DB:
@@ -67,14 +63,16 @@ class DB:
         user = self.get_user(username)
         self.words.add_pos(user['_id'], polish, portuguese, PRONOUN)
 
-    def get_words(self, username, sort_key=None):
+    def get_words(self, username, sort_key=None, **query_conds):
         user = self.get_user(username)
-        return self.words.get_words(user['_id'], sort_key)
+        return self.words.get_words(user['_id'], sort_key, **query_conds)
 
-    def generate_test_words(self, username, test_type, days, pos, count):
+    def generate_test_words(self, username, days, pos, count):
         user = self.get_user(username)
-        for x in range(count):
-            yield 'aaa'
+        user_words = self.get_words(username, pos=pos, days=days)
+        words_count = len(user_words)
+        for _ in range(count):
+            yield user_words[random.randint(0, words_count - 1)]
 
     @classmethod
     def get_instance(cls, clean=False):
@@ -172,8 +170,16 @@ class WordsCollection:
     def add_pronoun(self, user_id, polish, portuguese):
         self.add_pos(user_id, polish, portuguese, PRONOUN)
 
-    def get_words(self, user_id, sort_key=None):
-        cursor = self.words.find({self.USER: user_id})
+    def get_words(self, user_id, sort_key=None, **query_conds):
+        query_dict = { self.USER: user_id }
+        pos = query_dict.get('pos', None)
+        days = query_dict.get('days', None)
+
+        #query_dict.update(**query_conds)
+        if pos:
+            query_dict.update({'pos': {'$in': pos }})
+        #cursor = self.words.find({self.USER: user_id})
+        cursor = self.words.find(query_dict)
         if sort_key:
             cursor = cursor.sort(sort_key)
 
