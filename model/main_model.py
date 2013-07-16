@@ -145,6 +145,9 @@ class Model:
     @throw_on_empty('test_type', 'pos', 'count')
     def generate_test_words(self, test_type, days, pos, count):
         db_pos = [pos_gui_to_model[p] for p in pos]
+        if not self.db.count_words(self.current_user_name, days=days, pos=db_pos):
+            raise ModelException('Empty generated words list')
+
         self.test_words = self.db.generate_test_words(self.current_user_name, days, db_pos, count)
         self.test_type = test_type
 

@@ -13,6 +13,6 @@ class PortugueseQLineEdit(QtGui.QLineEdit):
 
 
 def make_portuguese_line_edit(line_edit):
-    def to_portugese(s):
+    def to_portuguese(s):
         line_edit.setText(QtCore.QString(pl_to_br_layout(s)))
     line_edit.connect(line_edit, QtCore.SIGNAL('textEdited(QString)'), to_portuguese)

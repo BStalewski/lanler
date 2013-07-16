@@ -6,10 +6,10 @@ from PyQt4.QtGui import QFrame, QMessageBox
 
 from commons import CLICKED_SIGNAL, NotImplementedException, RightFrame
 from consts import *
-from model.db import DBException
+from model.main_model import ModelException
 from py_ui.test_params_ui import Ui_TestParamsFrame
 from py_ui.test_translate_ui import Ui_TestTranslateFrame
-from gui.custom_widgets.portuguese_qlineedit import make_portuguese_line_edit
+from custom_widgets.portuguese_qlineedit import make_portuguese_line_edit
 
 
 class TestParamsFrame(QFrame, Ui_TestParamsFrame, RightFrame):
@@ -96,31 +96,41 @@ class TestParamsFrame(QFrame, Ui_TestParamsFrame, RightFrame):
     def start_test(self):
         if self.validate():
             fields = self.get_fields()
-            self.model.generate_test_words(**fields)
             try:
-                word = self.model.get_next_test_word()
-            except DBException:
+                self.model.generate_test_words(**fields)
+            except ModelException:
                 QMessageBox.warning(self, u'Błąd', u'Błąd: brak słów w słowniku spełniających zadane kryteria.')
             else:
-                new_frame = TestTranslateFrame(word, 1, fields[u'count'], self.parent())
+                test_type = fields['test_type']
+                new_frame = TestTranslateFrame(self.model, 1, fields[u'count'], [], test_type, self.main_window)
                 self.main_window.show_frame(new_frame)
 
 
-class TestTranslateFrame(QFrame, Ui_TestTranslateFrame):
-    def __init__(self, word, current_count, total_count, parent):
+class TestTranslateFrame(QFrame, Ui_TestTranslateFrame, RightFrame):
+    def __init__(self, model, current_count, total_count, answers, test_type, parent):
         QFrame.__init__(self, parent)
+        RightFrame.__init__(self, parent)
         self.setupUi(self)
-        self.wordLabel.setText(word)
+        self.model = model
         self.current_count = current_count
         self.total_count = total_count
+        self.answers = answers
+        self.test_type = test_type
+
+        word = self.model.get_next_test_word()
+        self.wordLabel.setText(word)
         self.progressBar.setValue(self.current_count)
         self.progressBar.setMaximum(self.total_count)
-
+        if self.test_type == PL_PT_TEST:
+            make_portuguese_line_edit(self.translationLineEdit)
         self.connect(self.nextPushButton, CLICKED_SIGNAL, self.next_word)
         self.connect(self.endPushButton, CLICKED_SIGNAL, self.end_test)
 
     def next_word(self):
-        raise NotImplementedException()
+        answers = self.answers
+        answers.append(self.translationLineEdit.text().trimmed())
+        new_frame = TestTranslateFrame(self.model, self.current_count + 1, self.total_count, answers, self.test_type, self.main_window)
+        self.main_window.show_frame(new_frame)
 
     def end_test(self):
         raise NotImplementedException()
