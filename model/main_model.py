@@ -15,8 +15,8 @@ ALL_POS = ['NOUN', 'VERB', 'ADJECTIVE', 'PRONOUN', ]
 def get_pos_mapping(mod_from, mod_to):
     return {mod_from.__dict__[pos]: mod_to.__dict__[pos] for pos in ALL_POS}
 
-pos_gui_model_dict = get_pos_mapping(gui_consts, consts)
-pos_model_gui_dict = get_pos_mapping(consts, gui_consts)
+pos_gui_to_model = get_pos_mapping(gui_consts, consts)
+pos_model_to_gui = get_pos_mapping(consts, gui_consts)
 
 
 def assert_user(fun):
@@ -144,7 +144,8 @@ class Model:
     @assert_user
     @throw_on_empty('test_type', 'pos', 'count')
     def generate_test_words(self, test_type, days, pos, count):
-        self.test_words = self.db.generate_test_words(self.current_user_name, days, pos, count)
+        db_pos = [pos_gui_to_model[p] for p in pos]
+        self.test_words = self.db.generate_test_words(self.current_user_name, days, db_pos, count)
         self.test_type = test_type
 
     @assert_user

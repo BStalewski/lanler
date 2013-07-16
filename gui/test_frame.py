@@ -6,6 +6,7 @@ from PyQt4.QtGui import QFrame, QMessageBox
 
 from commons import CLICKED_SIGNAL, NotImplementedException, RightFrame
 from consts import *
+from model.db import DBException
 from py_ui.test_params_ui import Ui_TestParamsFrame
 from py_ui.test_translate_ui import Ui_TestTranslateFrame
 from gui.custom_widgets.portuguese_qlineedit import make_portuguese_line_edit
@@ -96,9 +97,13 @@ class TestParamsFrame(QFrame, Ui_TestParamsFrame, RightFrame):
         if self.validate():
             fields = self.get_fields()
             self.model.generate_test_words(**fields)
-            word = self.model.get_next_test_word()
-            new_frame = TestTranslateFrame(word, 1, fields[u'count'], self.parent())
-            self.main_window.show_frame(new_frame)
+            try:
+                word = self.model.get_next_test_word()
+            except DBException:
+                QMessageBox.warning(self, u'Błąd', u'Błąd: brak słów w słowniku spełniających zadane kryteria.')
+            else:
+                new_frame = TestTranslateFrame(word, 1, fields[u'count'], self.parent())
+                self.main_window.show_frame(new_frame)
 
 
 class TestTranslateFrame(QFrame, Ui_TestTranslateFrame):

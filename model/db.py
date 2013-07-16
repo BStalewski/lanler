@@ -1,10 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import datetime
+import pytz
 import random
 from pymongo import MongoClient
 
 from consts import *
+from commons import *
 from user import User
 
 
@@ -71,6 +74,9 @@ class DB:
         user = self.get_user(username)
         user_words = self.get_words(username, pos=pos, days=days)
         words_count = len(user_words)
+        if not words_count:
+            raise DBException('Empty words list')
+
         for _ in range(count):
             yield user_words[random.randint(0, words_count - 1)]
 
@@ -127,6 +133,7 @@ class WordsCollection:
     PORTUGUESE = u'portuguese'
     GENDER = u'gender'
     POS = u'pos'
+    LAST_MODIFICATION = u'last_modification'
 
     def __init__(self, words_coll):
         self.words = words_coll
@@ -147,6 +154,7 @@ class WordsCollection:
             self.PORTUGUESE: portuguese,
             self.GENDER: gender,
             self.POS: NOUN,
+            self.LAST_MODIFICATION: get_current_utcdatetime(),
         }
 
         self.words.insert(new_noun)
@@ -157,6 +165,7 @@ class WordsCollection:
             self.POLISH: polish,
             self.PORTUGUESE: portuguese,
             self.POS: pos,
+            self.LAST_MODIFICATION: get_current_utcdatetime(),
         }
 
         self.words.insert(new_pos)
@@ -171,14 +180,16 @@ class WordsCollection:
         self.add_pos(user_id, polish, portuguese, PRONOUN)
 
     def get_words(self, user_id, sort_key=None, **query_conds):
-        query_dict = { self.USER: user_id }
-        pos = query_dict.get('pos', None)
-        days = query_dict.get('days', None)
+        query_dict = {self.USER: user_id}
+        pos = query_conds.get('pos', None)
+        days = query_conds.get('days', None)
 
-        #query_dict.update(**query_conds)
         if pos:
-            query_dict.update({'pos': {'$in': pos }})
-        #cursor = self.words.find({self.USER: user_id})
+            query_dict.update({self.POS: {'$in': pos }})
+        if days:
+            start_datetime = get_past_utcdatetime(days=days)
+            query_dict.update({self.LAST_MODIFICATION: {'$gt': start_datetime}})
+
         cursor = self.words.find(query_dict)
         if sort_key:
             cursor = cursor.sort(sort_key)
