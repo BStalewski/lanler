@@ -107,18 +107,18 @@ class TestParamsFrame(QFrame, Ui_TestParamsFrame, RightFrame):
 
 
 class TestTranslateFrame(QFrame, Ui_TestTranslateFrame, RightFrame):
-    def __init__(self, model, current_count, total_count, answers, test_type, parent):
+    def __init__(self, model, current_count, total_count, quest_answers, test_type, parent):
         QFrame.__init__(self, parent)
         RightFrame.__init__(self, parent)
         self.setupUi(self)
         self.model = model
         self.current_count = current_count
         self.total_count = total_count
-        self.answers = answers
+        self.quest_answers = quest_answers
         self.test_type = test_type
+        self.word = self.model.get_next_test_word()
 
-        word = self.model.get_next_test_word()
-        self.wordLabel.setText(word)
+        self.wordLabel.setText(self.word)
         self.progressBar.setValue(self.current_count)
         self.progressBar.setMaximum(self.total_count)
         if self.test_type == PL_PT_TEST:
@@ -128,8 +128,9 @@ class TestTranslateFrame(QFrame, Ui_TestTranslateFrame, RightFrame):
 
     def next_word(self):
         answers = self.answers
-        answers.append(self.translationLineEdit.text().trimmed())
-        new_frame = TestTranslateFrame(self.model, self.current_count + 1, self.total_count, answers, self.test_type, self.main_window)
+        self.quest_answers.append((self.word, self.translationLineEdit.text().trimmed()))
+        new_frame = TestTranslateFrame(self.model, self.current_count + 1, self.total_count,
+                                       self.quest_answers, self.test_type, self.main_window)
         self.main_window.show_frame(new_frame)
 
     def end_test(self):

@@ -81,6 +81,10 @@ class DB:
         for _ in range(count):
             yield user_words[random.randint(0, words_count - 1)]
 
+    def get_translations(self, username, word, input_lang):
+        user = self.get_user(username)
+        return self.words.get_translations(user['_id'], word, input_lang)
+
     @classmethod
     def get_instance(cls, clean=False):
         if not cls.instance:
@@ -204,6 +208,25 @@ class WordsCollection:
             cursor = cursor.sort(sort_key)
 
         return list(cursor)
+
+    def get_translations(self, user_id, word, input_lang):
+        query_dict = {
+            self.USER: user_id,
+            input_lang: word,
+        }
+        transl_lang = self.get_other_lang(input_lang)
+        projection_dict = {'_id': 0, transl_lang: 1, }
+        cursor = self.words.find(query_dict, projection_dict)
+
+        return [el[transl_lang] for el in cursor]
+
+    def get_other_lang(self, lang):
+        if lang == self.POLISH:
+            return self.PORTUGUESE
+        elif lang == self.PORTUGUESE:
+            return self.POLISH
+        else:
+            raise DBException('Unknown language {0}'.format(lang))
 
 
 class DBException(Exception):

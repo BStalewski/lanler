@@ -4,7 +4,8 @@
 import consts
 import gui.consts as gui_consts
 
-from db import DB
+from consts import *
+from db import DB, WordsCollection
 from kmapper import map_pl_to_br
 
 from PyQt4.QtCore import Qt, QAbstractTableModel, QString, QVariant
@@ -155,6 +156,20 @@ class Model:
     def get_next_test_word(self):
         key = 'polish' if self.test_type == gui_consts.PL_PT_TEST else 'portuguese'
         return next(self.test_words)[key]
+
+    @to_model_format
+    @assert_user
+    @throw_on_empty('word', 'direction')
+    def get_word_translations(self, word, direction):
+        if direction not in [gui_consts.PL_PT_TEST, gui_consts.PT_PL_TEST]:
+            raise ModelException('Unknown translation direction in get_word_translations: {0}'.format(direction))
+
+        if direction == gui_consts.PL_PT_TEST:
+            input_lang = WordsCollection.POLISH
+        else:
+            input_lang = WordsCollection.PORTUGUESE
+
+        return self.db.get_translations(self.current_user_name, word, input_lang)
 
 
 class DictionaryModel(QAbstractTableModel):
