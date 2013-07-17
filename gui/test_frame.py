@@ -6,9 +6,10 @@ from PyQt4.QtGui import QFrame, QMessageBox
 
 from commons import CLICKED_SIGNAL, NotImplementedException, RightFrame
 from consts import *
-from model.main_model import ModelException
+from model.main_model import ModelException, TestResultsModel
 from py_ui.test_params_ui import Ui_TestParamsFrame
 from py_ui.test_translate_ui import Ui_TestTranslateFrame
+from py_ui.test_results_ui import Ui_TestResultsFrame
 from custom_widgets.portuguese_qlineedit import make_portuguese_line_edit
 
 
@@ -127,11 +128,27 @@ class TestTranslateFrame(QFrame, Ui_TestTranslateFrame, RightFrame):
         self.connect(self.endPushButton, CLICKED_SIGNAL, self.end_test)
 
     def next_word(self):
-        answers = self.answers
         self.quest_answers.append((self.word, self.translationLineEdit.text().trimmed()))
-        new_frame = TestTranslateFrame(self.model, self.current_count + 1, self.total_count,
-                                       self.quest_answers, self.test_type, self.main_window)
-        self.main_window.show_frame(new_frame)
+        if self.current_count < self.total_count:
+            new_frame = TestTranslateFrame(self.model, self.current_count + 1, self.total_count,
+                                           self.quest_answers, self.test_type, self.main_window)
+            self.main_window.show_frame(new_frame)
+        else:
+            return self.end_test()
+            #full_question_answers = [q_a + (self.model.get_word_translations(q_a[0]), )
+            #                         for q_a in self.quest_answers]
+            #new_frame = TestResultsFrame(full_question_answers, self.main_window)
 
     def end_test(self):
-        raise NotImplementedException()
+        full_question_answers = [q_a + (self.model.get_word_translations(q_a[0]), )
+                                 for q_a in self.quest_answers]
+        new_frame = TestResultsFrame(full_question_answers, self.main_window)
+        self.main_window.show_frame(new_frame)
+
+class TestResultsFrame(QFrame, Ui_TestResultsFrame, RightFrame):
+    def __init__(self, question_answers, parent):
+        QFrame.__init__(self, parent)
+        RightFrame.__init__(self, parent)
+        self.setupUi(self)
+        tablemodel = TestResultsModel(question_answers, self)
+        self.dictionaryTableView.setModel(tablemodel)

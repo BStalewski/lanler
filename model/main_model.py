@@ -254,5 +254,51 @@ class PlPtDictionaryModel(DictionaryModel):
         return [self.POLISH_NAME, self.PORTUGUESE_NAME]
 
 
+class TestResultsModel:
+    COLUMNS_COUNT = 3
+
+    def __init__(self, questions_answers):
+        self.incorrect = self.get_incorrect_questions_answers(questions_answers)
+        self.rows_count = len(self.incorrect)
+        self.columns_count = self.COLUMNS_COUNT
+        
+    def get_incorrect_questions_answers(self, questions_answers):
+        '''
+        Returns triples for incorrectly answered questions containing:
+        question, answer (incorect), correct answers.
+        '''
+        incorrect_ans_summary = []
+        for question, answer, correct_answers in questions_answers:
+            if answer not in correct_answers:
+                correct = ', '.join(correct_answers)
+                incorrect_ans_summary.append((question, answer, correct))
+
+        return incorrect_ans_summary
+
+    def rowCount(self, parent):
+        return self.rows_count
+
+    def columnCount(self, parent):
+        return self.columns_count
+
+    def data(self, index, role):
+        if not index.isValid():
+            return QVariant()
+        elif role != Qt.DisplayRole:
+            return QVariant()
+
+        row_count = index.row()
+        row = self.incorrect[row_count]
+        result = row[index.column()]
+
+        return QVariant(result)
+
+    def headerData(self, section, orientation, role):
+        if role == Qt.DisplayRole and orientation == Qt.Horizontal:
+            return QVariant(self.columns_names[section])
+        else:
+            return QAbstractTableModel.headerData(self, section, orientation, role)
+
+
 class ModelException(Exception):
     pass
