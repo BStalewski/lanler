@@ -62,7 +62,7 @@ def throw_on_empty(*check_args):
                     value = kwargs[arg_name]
                 else:
                     import inspect
-                    arg_spec = inspect.get_argspec(fun)
+                    arg_spec = inspect.getargspec(fun)
                     passed_args_count = len(args) + len(kwargs)
                     value = arg_spec.defaults[index - passed_args_count + 1]
 
@@ -254,13 +254,18 @@ class PlPtDictionaryModel(DictionaryModel):
         return [self.POLISH_NAME, self.PORTUGUESE_NAME]
 
 
-class TestResultsModel:
+class TestResultsModel(QAbstractTableModel):
     COLUMNS_COUNT = 3
+    FIRST_COLUMN = u'Pytanie'
+    SECOND_COLUMN = u'Twoja odpowiedź'
+    THIRD_COLUMN = u'Prawidłowe odpowiedzi'
 
-    def __init__(self, questions_answers):
+    def __init__(self, questions_answers, parent):
+        QAbstractTableModel.__init__(self, parent)
         self.incorrect = self.get_incorrect_questions_answers(questions_answers)
         self.rows_count = len(self.incorrect)
         self.columns_count = self.COLUMNS_COUNT
+        self.columns_names = [self.FIRST_COLUMN, self.SECOND_COLUMN, self.THIRD_COLUMN, ]
         
     def get_incorrect_questions_answers(self, questions_answers):
         '''

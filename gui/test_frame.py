@@ -135,20 +135,29 @@ class TestTranslateFrame(QFrame, Ui_TestTranslateFrame, RightFrame):
             self.main_window.show_frame(new_frame)
         else:
             return self.end_test()
-            #full_question_answers = [q_a + (self.model.get_word_translations(q_a[0]), )
-            #                         for q_a in self.quest_answers]
-            #new_frame = TestResultsFrame(full_question_answers, self.main_window)
 
     def end_test(self):
-        full_question_answers = [q_a + (self.model.get_word_translations(q_a[0]), )
-                                 for q_a in self.quest_answers]
+        def add_translations(question_answer):
+            question = question_answer[0]
+            translations = self.model.get_word_translations(question, self.test_type)
+            return question_answer + (translations, )
+
+        full_question_answers = [add_translations(q_a) for q_a in self.quest_answers]
         new_frame = TestResultsFrame(full_question_answers, self.main_window)
         self.main_window.show_frame(new_frame)
+
 
 class TestResultsFrame(QFrame, Ui_TestResultsFrame, RightFrame):
     def __init__(self, question_answers, parent):
         QFrame.__init__(self, parent)
         RightFrame.__init__(self, parent)
         self.setupUi(self)
-        tablemodel = TestResultsModel(question_answers, self)
-        self.dictionaryTableView.setModel(tablemodel)
+        tablemodel = TestResultsModel(question_answers, parent)
+        self.wrongAnswersTableView.setModel(tablemodel)
+        self.set_correct_answers_label()
+
+    def set_correct_answers_label(self):
+        current_text = self.resultsLabel.text()
+        # FIXME
+        new_text = '{}/{} {}'.format(3, 4, current_text)
+        self.resultsLabel.setText(new_text)
