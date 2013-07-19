@@ -152,12 +152,15 @@ class TestResultsFrame(QFrame, Ui_TestResultsFrame, RightFrame):
         QFrame.__init__(self, parent)
         RightFrame.__init__(self, parent)
         self.setupUi(self)
-        tablemodel = TestResultsModel(question_answers, parent)
+        self.question_answers = question_answers
+        tablemodel = TestResultsModel(self.question_answers, parent)
+        incorrect_count = len(tablemodel.get_incorrect_questions_answers())
+        self.correct_answers_count = len(self.question_answers) - incorrect_count
         self.wrongAnswersTableView.setModel(tablemodel)
         self.set_correct_answers_label()
 
     def set_correct_answers_label(self):
         current_text = self.resultsLabel.text()
-        # FIXME
-        new_text = '{}/{} {}'.format(3, 4, current_text)
+        all_answers_count = len(self.question_answers)
+        new_text = '{}/{} {}'.format(self.correct_answers_count, all_answers_count, current_text)
         self.resultsLabel.setText(new_text)

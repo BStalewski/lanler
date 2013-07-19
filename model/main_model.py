@@ -262,18 +262,19 @@ class TestResultsModel(QAbstractTableModel):
 
     def __init__(self, questions_answers, parent):
         QAbstractTableModel.__init__(self, parent)
-        self.incorrect = self.get_incorrect_questions_answers(questions_answers)
+        self.questions_answers = questions_answers
+        self.incorrect = self.get_incorrect_questions_answers()
         self.rows_count = len(self.incorrect)
         self.columns_count = self.COLUMNS_COUNT
         self.columns_names = [self.FIRST_COLUMN, self.SECOND_COLUMN, self.THIRD_COLUMN, ]
         
-    def get_incorrect_questions_answers(self, questions_answers):
+    def get_incorrect_questions_answers(self):
         '''
         Returns triples for incorrectly answered questions containing:
         question, answer (incorect), correct answers.
         '''
         incorrect_ans_summary = []
-        for question, answer, correct_answers in questions_answers:
+        for question, answer, correct_answers in self.questions_answers:
             if answer not in correct_answers:
                 correct = ', '.join(correct_answers)
                 incorrect_ans_summary.append((question, answer, correct))
