@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/test_translate.ui'
 #
-# Created: Tue Jul 30 22:08:32 2013
+# Created: Tue Jul 30 23:21:37 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -70,6 +70,7 @@ class Ui_TestTranslateFrame(object):
         self.verticalLayout.addWidget(self.progressBar)
 
         self.retranslateUi(TestTranslateFrame)
+        QtCore.QObject.connect(self.translationLineEdit, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.nextPushButton.click)
         QtCore.QMetaObject.connectSlotsByName(TestTranslateFrame)
 
     def retranslateUi(self, TestTranslateFrame):

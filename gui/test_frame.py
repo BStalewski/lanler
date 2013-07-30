@@ -126,6 +126,7 @@ class TestTranslateFrame(QFrame, Ui_TestTranslateFrame, RightFrame):
             make_portuguese_line_edit(self.translationLineEdit)
         self.connect(self.nextPushButton, CLICKED_SIGNAL, self.next_word)
         self.connect(self.endPushButton, CLICKED_SIGNAL, self.end_test)
+        #self.translationLineEdit.setFocus()
 
     def next_word(self):
         self.quest_answers.append((self.word, self.translationLineEdit.text().trimmed()))
@@ -145,6 +146,10 @@ class TestTranslateFrame(QFrame, Ui_TestTranslateFrame, RightFrame):
         full_question_answers = [add_translations(q_a) for q_a in self.quest_answers]
         new_frame = TestResultsFrame(full_question_answers, self.main_window)
         self.main_window.show_frame(new_frame)
+
+    def showEvent(self, e):
+        self.translationLineEdit.setFocus()
+        QFrame.showEvent(self, e)
 
 
 class TestResultsFrame(QFrame, Ui_TestResultsFrame, RightFrame):

@@ -98,5 +98,22 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>translationLineEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>nextPushButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>74</x>
+     <y>78</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>74</x>
+     <y>120</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
