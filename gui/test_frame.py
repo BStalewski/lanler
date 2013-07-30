@@ -1,10 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from PyQt4.QtCore import QString
 from PyQt4.QtGui import QFrame, QMessageBox
 
-from commons import CLICKED_SIGNAL, NotImplementedException, RightFrame
+from commons import CLICKED_SIGNAL, RightFrame
 from consts import *
 from model.main_model import ModelException, TestResultsModel
 from py_ui.test_params_ui import Ui_TestParamsFrame
@@ -53,7 +52,6 @@ class TestParamsFrame(QFrame, Ui_TestParamsFrame, RightFrame):
         self.set_all_pos_checkboxes(False)
 
     def validate(self):
-        types_radio_checked = 0
         types_checked = sum(btn.isChecked() for btn in self.type_radios)
         if types_checked != 1:
             QMessageBox.warning(self, u'Błąd', u'Błąd: dokładnie jeden typ testu musi być zaznaczony')
@@ -126,7 +124,6 @@ class TestTranslateFrame(QFrame, Ui_TestTranslateFrame, RightFrame):
             make_portuguese_line_edit(self.translationLineEdit)
         self.connect(self.nextPushButton, CLICKED_SIGNAL, self.next_word)
         self.connect(self.endPushButton, CLICKED_SIGNAL, self.end_test)
-        #self.translationLineEdit.setFocus()
 
     def next_word(self):
         self.quest_answers.append((self.word, self.translationLineEdit.text().trimmed()))

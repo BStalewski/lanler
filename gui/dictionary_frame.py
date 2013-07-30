@@ -32,7 +32,6 @@ class PtPlDictionaryFrame(QFrame, Ui_PtPlDictionaryFrame, RightFrame):
         QFrame.__init__(self, parent)
         RightFrame.__init__(self, parent)
         self.setupUi(self)
-        self.connect(self.backButton, CLICKED_SIGNAL, self.back)
 
         self.model = model
 
@@ -51,9 +50,6 @@ class PtPlDictionaryFrame(QFrame, Ui_PtPlDictionaryFrame, RightFrame):
             pass
 
         QFrame.resize(self, *args)
-
-    def back(self):
-        raise NotImplementedException('back')
 
 
 class PlPtDictionaryFrame(PtPlDictionaryFrame):

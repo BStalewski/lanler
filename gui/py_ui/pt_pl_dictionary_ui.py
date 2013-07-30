@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/pt_pl_dictionary.ui'
 #
-# Created: Tue Jul 30 23:21:37 2013
+# Created: Tue Jul 30 23:48:48 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -47,9 +47,6 @@ class Ui_PtPlDictionaryFrame(object):
         self.dictionaryTableView.setObjectName(_fromUtf8("dictionaryTableView"))
         self.dictionaryTableView.verticalHeader().setVisible(False)
         self.verticalLayout.addWidget(self.dictionaryTableView)
-        self.backButton = QtGui.QPushButton(PtPlDictionaryFrame)
-        self.backButton.setObjectName(_fromUtf8("backButton"))
-        self.verticalLayout.addWidget(self.backButton)
 
         self.retranslateUi(PtPlDictionaryFrame)
         QtCore.QMetaObject.connectSlotsByName(PtPlDictionaryFrame)
@@ -57,5 +54,4 @@ class Ui_PtPlDictionaryFrame(object):
     def retranslateUi(self, PtPlDictionaryFrame):
         PtPlDictionaryFrame.setWindowTitle(_translate("PtPlDictionaryFrame", "Frame", None))
         self.label.setText(_translate("PtPlDictionaryFrame", "Słownik portugalsko - polski", None))
-        self.backButton.setText(_translate("PtPlDictionaryFrame", "Wstecz", None))
 
