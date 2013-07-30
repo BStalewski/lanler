@@ -26,6 +26,8 @@ class ChooseDictionaryFrame(QFrame, Ui_ChooseDictionaryFrame, RightFrame):
 
 
 class PtPlDictionaryFrame(QFrame, Ui_PtPlDictionaryFrame, RightFrame):
+    COLUMN_WIDTH = 300
+
     def __init__(self, model, parent):
         QFrame.__init__(self, parent)
         RightFrame.__init__(self, parent)
@@ -37,6 +39,9 @@ class PtPlDictionaryFrame(QFrame, Ui_PtPlDictionaryFrame, RightFrame):
         tablemodel = PtPlDictionaryModel(self.model.get_current_user(), self)
         self.dictionaryTableView.setModel(tablemodel)
 
+        for i in range(tablemodel.columnCount(None)):
+            self.dictionaryTableView.setColumnWidth(i, self.COLUMN_WIDTH)
+
     def resize(self, *args):
         try:
             self.dictionaryTableView.setVisible(False)
@@ -44,6 +49,7 @@ class PtPlDictionaryFrame(QFrame, Ui_PtPlDictionaryFrame, RightFrame):
             self.dictionaryTableView.setVisible(True)
         except AttributeError:
             pass
+
         QFrame.resize(self, *args)
 
     def back(self):

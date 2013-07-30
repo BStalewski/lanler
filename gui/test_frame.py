@@ -148,6 +148,8 @@ class TestTranslateFrame(QFrame, Ui_TestTranslateFrame, RightFrame):
 
 
 class TestResultsFrame(QFrame, Ui_TestResultsFrame, RightFrame):
+    COLUMN_WIDTH = 300
+
     def __init__(self, question_answers, parent):
         QFrame.__init__(self, parent)
         RightFrame.__init__(self, parent)
@@ -158,6 +160,9 @@ class TestResultsFrame(QFrame, Ui_TestResultsFrame, RightFrame):
         self.correct_answers_count = len(self.question_answers) - incorrect_count
         self.wrongAnswersTableView.setModel(tablemodel)
         self.set_correct_answers_label()
+
+        for i in range(tablemodel.columnCount(None)):
+            self.wrongAnswersTableView.setColumnWidth(i, self.COLUMN_WIDTH)
 
     def set_correct_answers_label(self):
         current_text = self.resultsLabel.text()

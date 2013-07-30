@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/main.ui'
 #
-# Created: Wed Jul 17 23:59:07 2013
+# Created: Tue Jul 30 22:08:31 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -34,13 +34,12 @@ class Ui_MainWindow(object):
         self.gridLayout = QtGui.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setSizeConstraint(QtGui.QLayout.SetMaximumSize)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
         self.verticalLayout = QtGui.QVBoxLayout()
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        spacerItem1 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem1)
+        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem)
         self.addPoSButton = QtGui.QPushButton(self.centralwidget)
         self.addPoSButton.setObjectName(_fromUtf8("addPoSButton"))
         self.verticalLayout.addWidget(self.addPoSButton)
@@ -53,11 +52,9 @@ class Ui_MainWindow(object):
         self.optionsButton = QtGui.QPushButton(self.centralwidget)
         self.optionsButton.setObjectName(_fromUtf8("optionsButton"))
         self.verticalLayout.addWidget(self.optionsButton)
-        spacerItem2 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem2)
+        spacerItem1 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem1)
         self.horizontalLayout.addLayout(self.verticalLayout)
-        spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem3)
         self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)

@@ -1,20 +1,18 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from PyQt4 import QtGui, QtCore
 from PyQt4.QtGui import (QAction, QApplication, QCheckBox, QDialog,
                          QMainWindow, QMessageBox, QRadioButton, )
 
-from commons import CLICKED_SIGNAL, NotImplementedException
-from model.main_model import Model
-from dictionary_frame import ChooseDictionaryFrame
-from options_frame import OptionsFrame
-from pos_frame import AddPoSFrame
-from test_frame import TestParamsFrame
+from gui.commons import CLICKED_SIGNAL
+from gui.dictionary_frame import ChooseDictionaryFrame
+from gui.options_frame import OptionsFrame
+from gui.pos_frame import AddPoSFrame
+from gui.test_frame import TestParamsFrame
 
-from py_ui.main_ui import Ui_MainWindow
-from py_ui.choose_user_ui import Ui_ChooseUserDialog
-from py_ui.new_user_ui import Ui_NewUserDialog
+from gui.py_ui.main_ui import Ui_MainWindow
+from gui.py_ui.choose_user_ui import Ui_ChooseUserDialog
+from gui.py_ui.new_user_ui import Ui_NewUserDialog
 
 
 class Gui(QMainWindow, Ui_MainWindow):

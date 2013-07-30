@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/test_params.ui'
 #
-# Created: Wed Jul 17 23:59:08 2013
+# Created: Tue Jul 30 22:08:32 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -27,6 +27,11 @@ class Ui_TestParamsFrame(object):
     def setupUi(self, TestParamsFrame):
         TestParamsFrame.setObjectName(_fromUtf8("TestParamsFrame"))
         TestParamsFrame.resize(224, 516)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(TestParamsFrame.sizePolicy().hasHeightForWidth())
+        TestParamsFrame.setSizePolicy(sizePolicy)
         TestParamsFrame.setFrameShape(QtGui.QFrame.StyledPanel)
         TestParamsFrame.setFrameShadow(QtGui.QFrame.Raised)
         self.verticalLayout_2 = QtGui.QVBoxLayout(TestParamsFrame)

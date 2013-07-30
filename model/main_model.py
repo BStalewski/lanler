@@ -267,7 +267,7 @@ class TestResultsModel(QAbstractTableModel):
         self.rows_count = len(self.incorrect)
         self.columns_count = self.COLUMNS_COUNT
         self.columns_names = [self.FIRST_COLUMN, self.SECOND_COLUMN, self.THIRD_COLUMN, ]
-        
+
     def get_incorrect_questions_answers(self):
         '''
         Returns triples for incorrectly answered questions containing:
