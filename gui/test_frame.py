@@ -38,7 +38,10 @@ class TestParamsFrame(QFrame, Ui_TestParamsFrame, RightFrame):
             self.nounCheckBox: NOUN,
             self.verbCheckBox: VERB,
             self.adjectiveCheckBox: ADJECTIVE,
+            self.adverbCheckBox: ADVERB,
             self.pronounCheckBox: PRONOUN,
+            self.numeralCheckBox: NUMERAL,
+            self.conjunctionCheckBox: CONJUNCTION,
         }
 
     def set_all_pos_checkboxes(self, checked):

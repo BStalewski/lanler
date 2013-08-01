@@ -11,7 +11,9 @@ from kmapper import map_pl_to_br
 from PyQt4.QtCore import Qt, QAbstractTableModel, QString, QVariant
 
 
-ALL_POS = ['NOUN', 'VERB', 'ADJECTIVE', 'PRONOUN', ]
+ALL_POS = ['NOUN', 'VERB', 'ADJECTIVE', 'ADVERB',
+           'PRONOUN', 'NUMERAL', 'CONJUNCTION']
+
 
 def get_pos_mapping(mod_from, mod_to):
     return {mod_from.__dict__[pos]: mod_to.__dict__[pos] for pos in ALL_POS}

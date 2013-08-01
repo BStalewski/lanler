@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>224</width>
-    <height>516</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -119,9 +119,30 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="adverbCheckBox">
+        <property name="text">
+         <string>Przysłówki</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="pronounCheckBox">
         <property name="text">
          <string>Zaimki</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="numeralCheckBox">
+        <property name="text">
+         <string>Liczebniki</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="conjunctionCheckBox">
+        <property name="text">
+         <string>Spójniki</string>
         </property>
        </widget>
       </item>

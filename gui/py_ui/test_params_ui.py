@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/test_params.ui'
 #
-# Created: Thu Aug  1 23:39:04 2013
+# Created: Thu Aug  1 23:58:38 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_TestParamsFrame(object):
     def setupUi(self, TestParamsFrame):
         TestParamsFrame.setObjectName(_fromUtf8("TestParamsFrame"))
-        TestParamsFrame.resize(224, 516)
+        TestParamsFrame.resize(224, 600)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -78,9 +78,18 @@ class Ui_TestParamsFrame(object):
         self.adjectiveCheckBox = QtGui.QCheckBox(self.posChooseGroupBox)
         self.adjectiveCheckBox.setObjectName(_fromUtf8("adjectiveCheckBox"))
         self.verticalLayout_4.addWidget(self.adjectiveCheckBox)
+        self.adverbCheckBox = QtGui.QCheckBox(self.posChooseGroupBox)
+        self.adverbCheckBox.setObjectName(_fromUtf8("adverbCheckBox"))
+        self.verticalLayout_4.addWidget(self.adverbCheckBox)
         self.pronounCheckBox = QtGui.QCheckBox(self.posChooseGroupBox)
         self.pronounCheckBox.setObjectName(_fromUtf8("pronounCheckBox"))
         self.verticalLayout_4.addWidget(self.pronounCheckBox)
+        self.numeralCheckBox = QtGui.QCheckBox(self.posChooseGroupBox)
+        self.numeralCheckBox.setObjectName(_fromUtf8("numeralCheckBox"))
+        self.verticalLayout_4.addWidget(self.numeralCheckBox)
+        self.conjunctionCheckBox = QtGui.QCheckBox(self.posChooseGroupBox)
+        self.conjunctionCheckBox.setObjectName(_fromUtf8("conjunctionCheckBox"))
+        self.verticalLayout_4.addWidget(self.conjunctionCheckBox)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.checkAllPosPushButton = QtGui.QPushButton(self.posChooseGroupBox)
@@ -121,7 +130,10 @@ class Ui_TestParamsFrame(object):
         self.nounCheckBox.setText(_translate("TestParamsFrame", "Rzeczowniki", None))
         self.verbCheckBox.setText(_translate("TestParamsFrame", "Czasowniki", None))
         self.adjectiveCheckBox.setText(_translate("TestParamsFrame", "Przymiotniki", None))
+        self.adverbCheckBox.setText(_translate("TestParamsFrame", "Przysłówki", None))
         self.pronounCheckBox.setText(_translate("TestParamsFrame", "Zaimki", None))
+        self.numeralCheckBox.setText(_translate("TestParamsFrame", "Liczebniki", None))
+        self.conjunctionCheckBox.setText(_translate("TestParamsFrame", "Spójniki", None))
         self.checkAllPosPushButton.setText(_translate("TestParamsFrame", "Zaznacz", None))
         self.uncheckAllPosPushButton.setText(_translate("TestParamsFrame", "Odznacz", None))
         self.testsCountGroupBox.setTitle(_translate("TestParamsFrame", "Liczba testów:", None))
