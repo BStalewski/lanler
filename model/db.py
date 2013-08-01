@@ -62,9 +62,21 @@ class DB:
         user = self.get_user(username)
         self.words.add_pos(user['_id'], polish, portuguese, ADJECTIVE)
 
+    def add_adverb(self, username, polish, portuguese):
+        user = self.get_user(username)
+        self.words.add_pos(user['_id'], polish, portuguese, ADVERB)
+
     def add_pronoun(self, username, polish, portuguese):
         user = self.get_user(username)
         self.words.add_pos(user['_id'], polish, portuguese, PRONOUN)
+
+    def add_numeral(self, username, polish, portuguese):
+        user = self.get_user(username)
+        self.words.add_pos(user['_id'], polish, portuguese, NUMERAL)
+
+    def add_conjunction(self, username, polish, portuguese):
+        user = self.get_user(username)
+        self.words.add_pos(user['_id'], polish, portuguese, CONJUNCTION)
 
     def get_words(self, username, sort_key=None, **query_conds):
         user = self.get_user(username)

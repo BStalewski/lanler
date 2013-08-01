@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/choose_add_pos.ui'
 #
-# Created: Tue Jul 30 23:48:47 2013
+# Created: Thu Aug  1 23:39:03 2013
 #      by: PyQt4 UI code generator 4.10.2-snapshot-74ade0e1faf2
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_AddPoSFrame(object):
     def setupUi(self, AddPoSFrame):
         AddPoSFrame.setObjectName(_fromUtf8("AddPoSFrame"))
-        AddPoSFrame.resize(133, 160)
+        AddPoSFrame.resize(213, 339)
         AddPoSFrame.setFrameShape(QtGui.QFrame.StyledPanel)
         AddPoSFrame.setFrameShadow(QtGui.QFrame.Raised)
         self.horizontalLayout = QtGui.QHBoxLayout(AddPoSFrame)
@@ -46,9 +46,18 @@ class Ui_AddPoSFrame(object):
         self.addAdjectiveButton = QtGui.QPushButton(AddPoSFrame)
         self.addAdjectiveButton.setObjectName(_fromUtf8("addAdjectiveButton"))
         self.verticalLayout.addWidget(self.addAdjectiveButton)
+        self.addAdverbButton = QtGui.QPushButton(AddPoSFrame)
+        self.addAdverbButton.setObjectName(_fromUtf8("addAdverbButton"))
+        self.verticalLayout.addWidget(self.addAdverbButton)
         self.addPronounButton = QtGui.QPushButton(AddPoSFrame)
         self.addPronounButton.setObjectName(_fromUtf8("addPronounButton"))
         self.verticalLayout.addWidget(self.addPronounButton)
+        self.addNumeralButton = QtGui.QPushButton(AddPoSFrame)
+        self.addNumeralButton.setObjectName(_fromUtf8("addNumeralButton"))
+        self.verticalLayout.addWidget(self.addNumeralButton)
+        self.addConjunctionButton = QtGui.QPushButton(AddPoSFrame)
+        self.addConjunctionButton.setObjectName(_fromUtf8("addConjunctionButton"))
+        self.verticalLayout.addWidget(self.addConjunctionButton)
         spacerItem2 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem2)
         self.horizontalLayout.addLayout(self.verticalLayout)
@@ -63,5 +72,8 @@ class Ui_AddPoSFrame(object):
         self.addNounButton.setText(_translate("AddPoSFrame", "Rzeczownik", None))
         self.addVerbButton.setText(_translate("AddPoSFrame", "Czasownik", None))
         self.addAdjectiveButton.setText(_translate("AddPoSFrame", "Przymiotnik", None))
+        self.addAdverbButton.setText(_translate("AddPoSFrame", "Przysłówek", None))
         self.addPronounButton.setText(_translate("AddPoSFrame", "Zaimek", None))
+        self.addNumeralButton.setText(_translate("AddPoSFrame", "Liczebnik", None))
+        self.addConjunctionButton.setText(_translate("AddPoSFrame", "Spójnik", None))
 

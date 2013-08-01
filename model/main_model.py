@@ -137,9 +137,26 @@ class Model:
     @to_model_format
     @assert_user
     @throw_on_empty('polish', 'portuguese')
+    def add_adverb(self, polish, portuguese):
+        self.db.add_adverb(self.current_user_name, polish, portuguese)
+
+    @to_model_format
+    @assert_user
+    @throw_on_empty('polish', 'portuguese')
     def add_pronoun(self, polish, portuguese):
         self.db.add_pronoun(self.current_user_name, polish, portuguese)
 
+    @to_model_format
+    @assert_user
+    @throw_on_empty('polish', 'portuguese')
+    def add_numeral(self, polish, portuguese):
+        self.db.add_numeral(self.current_user_name, polish, portuguese)
+
+    @to_model_format
+    @assert_user
+    @throw_on_empty('polish', 'portuguese')
+    def add_conjunction(self, polish, portuguese):
+        self.db.add_conjunction(self.current_user_name, polish, portuguese)
 
     @to_model_format
     @assert_user

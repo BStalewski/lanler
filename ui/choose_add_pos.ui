@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>133</width>
-    <height>160</height>
+    <width>213</width>
+    <height>339</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,9 +70,30 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="addAdverbButton">
+       <property name="text">
+        <string>Przysłówek</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="addPronounButton">
        <property name="text">
         <string>Zaimek</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="addNumeralButton">
+       <property name="text">
+        <string>Liczebnik</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="addConjunctionButton">
+       <property name="text">
+        <string>Spójnik</string>
        </property>
       </widget>
      </item>

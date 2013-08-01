@@ -17,7 +17,10 @@ class AddPoSFrame(QFrame, Ui_AddPoSFrame, RightFrame):
         self.connect(self.addNounButton, CLICKED_SIGNAL, self.add_noun)
         self.connect(self.addVerbButton, CLICKED_SIGNAL, self.add_verb)
         self.connect(self.addAdjectiveButton, CLICKED_SIGNAL, self.add_adjective)
+        self.connect(self.addAdverbButton, CLICKED_SIGNAL, self.add_adverb)
         self.connect(self.addPronounButton, CLICKED_SIGNAL, self.add_pronoun)
+        self.connect(self.addNumeralButton, CLICKED_SIGNAL, self.add_numeral)
+        self.connect(self.addConjunctionButton, CLICKED_SIGNAL, self.add_conjunction)
         self.model = model
 
     def add_noun(self):
@@ -35,10 +38,25 @@ class AddPoSFrame(QFrame, Ui_AddPoSFrame, RightFrame):
         if dialog.exec_():
             self.model.add_adjective(**dialog.get_fields())
 
+    def add_adverb(self):
+        dialog = AddPoSDialog(self)
+        if dialog.exec_():
+            self.model.add_adverb(**dialog.get_fields())
+
     def add_pronoun(self):
         dialog = AddPoSDialog(self)
         if dialog.exec_():
             self.model.add_pronoun(**dialog.get_fields())
+
+    def add_numeral(self):
+        dialog = AddPoSDialog(self)
+        if dialog.exec_():
+            self.model.add_numeral(**dialog.get_fields())
+
+    def add_conjunction(self):
+        dialog = AddPoSDialog(self)
+        if dialog.exec_():
+            self.model.add_conjunction(**dialog.get_fields())
 
 
 class AddNounDialog(QDialog, Ui_AddNounDialog):
